@@ -143,25 +143,13 @@
             position: relative;
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary);
-            transition: 0.3s;
-        }
-        
         .nav-links a:hover { color: var(--primary); }
-        .nav-links a:hover::after { width: 100%; }
 
         /* --- HERO SECTION --- */
         #hero {
             min-height: 100vh;
-            background: linear-gradient(rgba(20, 50, 20, 0.85), rgba(20, 50, 20, 0.75)), 
-                        url('https://images.unsplash.com/photo-1625246333195-58197bd47d26?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background: linear-gradient(rgba(10, 30, 10, 0.9), rgba(20, 50, 20, 0.8)), 
+                        url('field-background.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -169,8 +157,7 @@
             align-items: center;
             justify-content: center;
             color: var(--white);
-            padding-top: 100px; /* offset for fixed nav */
-            padding-bottom: 50px;
+            padding-top: 100px;
             position: relative;
         }
 
@@ -180,7 +167,6 @@
             justify-content: space-between;
             gap: 50px;
             width: 100%;
-            max-width: 1100px;
         }
 
         .hero-text {
@@ -189,20 +175,18 @@
         }
 
         .hero-image {
-            flex: 0 0 350px;
-            animation: fadeInRight 1s ease-out;
-            position: relative;
+            flex: 0 0 400px;
+            animation: float 6s ease-in-out infinite;
         }
 
         .profile-pic {
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
+            width: 400px;
+            height: 400px;
+            border-radius: 40px;
             object-fit: cover;
-            border: 8px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            /* Replace placeholder URL with your actual photo URL */
-            background-color: #ddd; 
+            border: 10px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            background: #222;
         }
 
         .hero-content h1 {
@@ -228,34 +212,20 @@
             font-weight: 600;
             display: inline-block;
             margin-bottom: 25px;
-            backdrop-filter: blur(5px);
         }
 
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            color: var(--white);
-            font-size: 1.5rem;
-            opacity: 0.7;
-        }
-
-        /* --- EDUCATION ROADMAP (NEW) --- */
+        /* --- EDUCATION ROADMAP --- */
         .roadmap-wrapper {
             display: flex;
             flex-wrap: wrap;
-            align-items: flex-start;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
             gap: 40px;
         }
 
-        /* Map Side */
         .map-container {
             flex: 1;
-            min-width: 300px;
-            position: relative;
+            min-width: 350px;
             height: 600px;
             background: #fff;
             border-radius: 20px;
@@ -264,60 +234,49 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            position: relative;
         }
         
         .india-svg {
-            height: 100%;
-            width: 100%;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+            height: 90%;
+            width: auto;
         }
 
         .india-path {
-            fill: #e9ecef;
-            stroke: #ced4da;
-            stroke-width: 0.5;
+            fill: #f1f3f5;
+            stroke: #adb5bd;
+            stroke-width: 1;
             transition: 0.3s;
         }
 
-        /* Map Pins */
-        .map-pin {
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        
-        .map-pin circle {
+        .map-pin circle.main {
             fill: var(--primary);
             stroke: white;
             stroke-width: 2;
         }
+
+        .map-pin circle.pulse {
+            fill: var(--primary);
+            opacity: 0.4;
+            animation: pulse 2s infinite;
+        }
         
         .map-pin text {
-            font-size: 14px;
-            font-weight: bold;
-            fill: var(--dark);
+            font-size: 12px;
+            font-weight: 600;
+            fill: var(--primary-dark);
             opacity: 0;
             transition: 0.3s;
-            text-shadow: 0 0 5px white;
         }
 
-        .map-pin:hover circle, .map-pin.active circle {
-            fill: var(--accent);
-            r: 8;
-        }
+        .map-pin.active circle.main { fill: var(--accent); r: 10; }
+        .map-pin.active text { opacity: 1; transform: translateY(-5px); }
 
-        .map-pin:hover text, .map-pin.active text {
-            opacity: 1;
-        }
-
-        /* Content Side */
         .education-list {
             flex: 1;
             min-width: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 20px 0;
+            border-left: 2px dashed #ddd;
+            padding-left: 40px;
         }
 
         .edu-card {
@@ -326,143 +285,84 @@
             border-radius: 15px;
             margin-bottom: 30px;
             position: relative;
-            border-left: 5px solid #ddd;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .edu-card::before {
             content: '';
             position: absolute;
-            left: -36px;
-            top: 50%;
-            transform: translateY(-50%);
+            left: -51px;
+            top: 30px;
             width: 20px;
             height: 20px;
             background: var(--white);
             border: 4px solid #ddd;
             border-radius: 50%;
             z-index: 2;
-            transition: 0.3s;
-        }
-        
-        .education-list {
-            border-left: 2px dashed #ddd;
-            margin-left: 30px;
-            padding-left: 30px;
         }
 
-        .edu-card:hover, .edu-card.active {
-            border-left-color: var(--primary);
+        .edu-card:hover {
             transform: translateX(10px);
             box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary);
         }
 
-        .edu-card:hover::before, .edu-card.active::before {
-            border-color: var(--primary);
-            background: var(--accent);
+        /* --- PROJECTS --- */
+        .project-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.4s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .edu-card h3 { font-size: 1.25rem; color: var(--dark); }
-        .edu-card h4 { font-size: 1rem; color: var(--primary); font-weight: 600; margin-bottom: 5px; }
-        .edu-card .year { font-size: 0.9rem; color: #888; margin-bottom: 10px; display: block; font-style: italic;}
+        .project-card:hover { transform: translateY(-10px); }
 
-        /* --- EXPERIENCE --- */
+        .project-img-container {
+            height: 220px;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .project-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .project-content { padding: 30px; }
+
+        .tag {
+            background: #f0fdf4;
+            color: var(--primary-dark);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* --- OTHER SECTIONS --- */
         .exp-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
         .exp-card {
             background: var(--white);
             border-radius: 15px;
-            padding: 30px;
+            padding: 35px;
             box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-            transition: 0.3s;
-            border-top: 4px solid var(--primary);
-        }
-
-        .exp-card.featured { border-top-color: var(--mahindra-red); }
-        .exp-card:hover { transform: translateY(-10px); }
-
-        .company-logo-img {
-            max-height: 60px;
-            max-width: 150px;
-            object-fit: contain;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .exp-card h3 { font-size: 1.4rem; margin-bottom: 5px; }
-        .exp-card .role { color: var(--primary); font-weight: 600; margin-bottom: 15px; display: block; }
-        .exp-card ul li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            color: var(--text-grey);
-        }
-        .exp-card ul li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        /* --- PROJECTS --- */
-        .project-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: 0.3s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover { transform: translateY(-5px); }
-
-        .project-img {
-            height: 200px;
-            background-color: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-size: 3rem;
-        }
-        
-        .p-1 .project-img { background: linear-gradient(45deg, #2E7D32, #81c784); color: white; }
-        .p-2 .project-img { background: linear-gradient(45deg, #1565C0, #64b5f6); color: white; }
-
-        .project-content { padding: 25px; flex: 1; }
-        
-        .tech-stack {
-            margin-top: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            background: #e8f5e9;
-            color: var(--primary-dark);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* --- NEW SKILLS GRID --- */
-        .skills-grid-new {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            border-top: 5px solid var(--primary);
         }
 
         .skill-category-card {
@@ -471,83 +371,43 @@
             padding: 30px;
             box-shadow: var(--shadow);
             text-align: center;
-            transition: 0.3s;
-            border-bottom: 5px solid transparent;
-        }
-        
-        .skill-category-card:hover {
-            transform: translateY(-5px);
-            border-bottom-color: var(--primary);
         }
 
-        .skill-icon-lg {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            background: #e8f5e9;
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .skill-category-card h3 { margin-bottom: 15px; color: var(--dark); }
-        
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        
         .skill-chip {
-            border: 1px solid #ddd;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: #666;
-            font-weight: 500;
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin: 4px;
         }
 
-        /* --- CONTACT --- */
         #contact {
-            background: var(--dark);
+            background: #0a1a0a;
             color: var(--white);
+            padding: 80px 0;
             text-align: center;
         }
 
         .contact-box {
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 20px;
-            display: inline-block;
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 30px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 50px;
+            border-radius: 30px;
         }
 
-        .social-icons {
-            margin-top: 30px;
-            font-size: 1.5rem;
-        }
-        
         .social-icons a {
             color: var(--white);
-            margin: 0 15px;
-            padding: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
+            margin: 0 10px;
+            font-size: 1.2rem;
             width: 50px;
             height: 50px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        .social-icons a:hover {
-            background: var(--primary);
-            transform: scale(1.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
         }
 
         /* --- ANIMATIONS --- */
@@ -555,22 +415,21 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-            40% {transform: translateX(-50%) translateY(-10px);}
-            60% {transform: translateX(-50%) translateY(-5px);}
+        @keyframes pulse {
+            0% { r: 6; opacity: 0.4; }
+            100% { r: 20; opacity: 0; }
         }
 
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: 0.8s ease-out;
         }
         
         .reveal.active {
@@ -578,317 +437,190 @@
             transform: translateY(0);
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
             .hero-container { flex-direction: column-reverse; text-align: center; }
-            .hero-image { flex: 0 0 auto; margin-bottom: 30px; }
-            .profile-pic { width: 250px; height: 250px; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-            
-            .roadmap-wrapper { flex-direction: column; }
-            .map-container { height: 400px; width: 100%; }
-            .education-list { margin-left: 0; border-left: none; padding-left: 0; }
-            .edu-card { border-left: none; border-top: 5px solid #ddd; }
-            .edu-card::before { display: none; }
+            .hero-image { flex: 0 0 auto; }
+            .profile-pic { width: 300px; height: 300px; }
+            .hero-content h1 { font-size: 2.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
         <div class="container nav-content">
             <div class="logo">Vishal <span>S</span></div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#education">Roadmap</a></li>
+                <li><a href="#education">Education</a></li>
                 <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Research</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="hero">
         <div class="container hero-container">
             <div class="hero-text hero-content">
-                <div class="status-badge"><i class="fas fa-check-circle"></i> Open to Work: R&D (Sept 2026)</div>
-                <h1>Hello, I'm Vishal S</h1>
+                <div class="status-badge"><i class="fas fa-calendar-alt"></i> Available: Sept 2026</div>
+                <h1>Vishal Saravanan</h1>
                 <h2>PhD Scholar | Precision Ag | Reliability Engineer</h2>
-                <p style="margin-bottom: 30px; opacity: 0.9;">
-                    Bridging the gap between heavy machinery and intelligent systems. 
-                    Innovative Agricultural Engineer with expertise in DFMEA, Discrete Element Analysis, and Mechatronics.
+                <p style="margin-bottom: 30px; opacity: 0.8; font-size: 1.1rem;">
+                    Developing intelligent mechatronic solutions for the future of sustainable farm machinery.
                 </p>
                 <div>
-                    <a href="#contact" class="btn">Hire Me</a>
-                    <a href="https://linkedin.com/in/vishal-saravanan-746565224" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <!-- RESUME BUTTON ADDED HERE -->
-                    <a href="Vishal_S_Resume.pdf" download class="btn btn-outline"><i class="fas fa-file-download"></i> Resume</a>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                    <a href="Vishal_S_Resume.pdf" download class="btn btn-outline"><i class="fas fa-download"></i> CV</a>
                 </div>
             </div>
             
             <div class="hero-image">
-                <!-- PHOTO PLACEHOLDER: Replace src with your actual photo URL -->
-                <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vishal S" class="profile-pic">
-            </div>
-        </div>
-        <a href="#about" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section-padding">
-        <div class="container">
-            <h2 class="section-title">Who Am I?</h2>
-            <div class="reveal" style="text-align: center; max-width: 800px; margin: auto; font-size: 1.1rem; color: var(--text-grey);">
-                <p>I am an ambitious <strong>Agricultural Engineer</strong> pursuing a PhD with a specialization in mechatronics and precision agriculture. Currently based in Tamil Nadu, I combine academic rigor with practical industrial insights from Mahindra & Mahindra.</p>
-                <br>
-                <p>My goal is to secure a challenging R&D role where I can apply my knowledge of robotics, sensor technology, and mechanical reliability to build the next generation of farm machinery.</p>
+                <img src="my-photo.jpg" alt="Vishal Saravanan" class="profile-pic" onerror="this.src='https://via.placeholder.com/400x400?text=Upload+my-photo.jpg'">
             </div>
         </div>
     </section>
 
-    <!-- Education Roadmap Section -->
-    <section id="education" class="section-padding" style="background-color: #f0f4f0;">
+    <section id="education" class="section-padding" style="background: #fff;">
         <div class="container">
-            <h2 class="section-title">My Academic Journey</h2>
-            <p style="text-align: center; margin-bottom: 40px; color: #666;">Hover over the cards or the map points to see my path.</p>
-            
+            <h2 class="section-title">Academic Roadmap</h2>
             <div class="roadmap-wrapper">
-                <!-- Left: Interactive Map -->
                 <div class="map-container reveal">
-                    <svg class="india-svg" viewBox="0 0 612 792" xmlns="http://www.w3.org/2000/svg">
-                        <!-- ACCURATE INDIA PATH -->
-                        <path class="india-path" d="M299.8,7.6c0,0-15.3,16.2-16.2,21c-0.9,4.8-10.8,3-14.4,1.8c-3.6-1.2-12,4.8-13.8,11.4c-1.8,6.6-4.2,2.4-7.8,3c-3.6,0.6-2.4,9-5.4,11.4c-3,2.4-8.4-1.8-10.2,3c-1.8,4.8-13.8,13.2-13.8,19.2c0,6,7.8,10.2,7.2,16.8c-0.6,6.6-6.6,12.6-6,17.4c0.6,4.8,2.4,15,0,18c-2.4,3-6.6,1.8-7.8,5.4c-1.2,3.6-1.2,12.6,2.4,14.4c3.6,1.8,13.8-3,18.6-1.2c4.8,1.8,13.2,10.2,16.2,12.6c3,2.4,13.2,1.2,18,3.6c4.8,2.4,3,9,3,13.2s3,4.2,3,9s4.8,10.2,10.2,12c5.4,1.8,10.8,5.4,12.6,9c1.8,3.6,1.2,10.2,1.2,14.4s-1.8,11.4,1.8,13.2c3.6,1.8,8.4-3.6,13.8-4.8c5.4-1.2,7.2,7.2,11.4,7.8c4.2,0.6,15-4.2,19.8-1.2c4.8,3,8.4,11.4,10.2,16.2s3,15.6,3,15.6s-1.8,9-1.8,13.8c0,4.8,3.6,6.6,3.6,10.2s-6.6,16.8-6,21.6c0.6,4.8,4.2,7.2,4.2,11.4c0,4.2-3.6,9.6-6,12.6s-9.6,7.2-10.8,12c-1.2,4.8,1.2,14.4,2.4,18c1.2,3.6,3.6,12.6,4.8,16.8c1.2,4.2,3.6,7.2,0,10.2c-3.6,3-18.6,39-21.6,42c-3,3-5.4,12.6-7.8,16.2c-2.4,3.6-7.8,6-10.2,9c-2.4,3-7.2,12-7.2,12s5.4,11.4,7.8,14.4c2.4,3,11.4,13.8,13.8,16.8c2.4,3,3,9,5.4,11.4c2.4,2.4,7.2,4.8,9,8.4c1.8,3.6,0.6,10.2,1.8,13.8c1.2,3.6,3,7.2,4.8,10.2c1.8,3,5.4,5.4,7.8,9s3,9.6,4.2,12.6c1.2,3,3,9.6,4.8,11.4c1.8,1.8,7.8,8.4,9,11.4c1.2,3,1.8,7.8,3.6,10.2c1.8,2.4,5.4,6.6,7.2,9.6c1.8,3,4.2,4.8,6,7.8c1.8,3,3.6,9.6,3.6,13.2c0,3.6-0.6,7.8-1.2,12s-3,8.4-4.2,11.4c-1.2,3-3.6,6-4.8,9.6c-1.2,3.6-3,6-4.8,7.8c-1.8,1.8-6,2.4-7.8,3.6c-1.8,1.2-6,0-7.8-1.2c-1.8-1.2-5.4-3.6-8.4-2.4c-3,1.2-10.2,9-12.6,10.8c-2.4,1.8-9,5.4-11.4,7.2c-2.4,1.8-7.2,3-9.6,2.4c-2.4-0.6-8.4-6-10.8-6.6c-2.4-0.6-10.8,1.8-13.8,2.4c-3,0.6-10.8-1.2-14.4-1.8c-3.6-0.6-8.4-3.6-11.4-4.8c-3-1.2-8.4-4.2-12-5.4c-3.6-1.2-12.6-5.4-15.6-7.2c-3-1.8-6.6-6-9-7.2c-2.4-1.2-8.4-2.4-11.4-3.6c-3-1.2-9.6-6-12.6-7.2c-3-1.2-10.2-2.4-13.2-3.6c-3-1.2-10.2-3.6-12.6-6s-6-8.4-8.4-11.4c-2.4-3-8.4-9.6-11.4-12c-3-2.4-6-5.4-9.6-6.6c-3.6-1.2-11.4-0.6-13.8,1.8c-2.4,2.4-3,11.4-4.2,14.4c-1.2,3-4.2,9.6-4.2,9.6s-3-3.6-5.4-4.8c-2.4-1.2-9-1.8-11.4-0.6c-2.4,1.2-6,7.2-7.8,9.6c-1.8,2.4-5.4,7.2-7.8,7.8c-2.4,0.6-7.8-3.6-9.6-5.4c-1.8-1.8-4.2-6.6-4.2-6.6s-5.4,3.6-8.4,4.2c-3,0.6-9.6-1.8-12-3c-2.4-1.2-6.6-5.4-9-6.6c-2.4-1.2-5.4-4.2-7.8-4.8c-2.4-0.6-6.6,1.8-9,2.4c-2.4,0.6-7.2-2.4-9.6-3.6c-2.4-1.2-7.8-4.2-10.8-4.2c-3,0-7.2,4.8-10.2,4.2c-3-0.6-9-7.2-11.4-9.6c-2.4-2.4-7.2-7.2-9.6-8.4c-2.4-1.2-9,0-12-1.2c-3-1.2-7.2-4.2-10.2-6.6s-4.8-6.6-7.2-9c-2.4-2.4-6.6-6.6-8.4-10.2c-1.8-3.6-4.2-12-4.2-12s3-6,5.4-9c2.4-3,5.4-9,6.6-12s3-7.8,4.2-10.2c1.2-2.4,4.2-6.6,5.4-9.6c1.2-3,1.2-7.8,0.6-11.4c-0.6-3.6-4.8-7.8-6-11.4c-1.2-3.6-0.6-8.4,0-12.6c0.6-4.2,4.2-7.2,5.4-10.8c1.2-3.6,1.8-9.6,3-13.2c1.2-3.6,3-9,4.2-12.6c1.2-3.6,1.8-9,2.4-12.6c0.6-3.6,0.6-8.4,1.2-12c0.6-3.6,1.8-9.6,3-13.2c1.2-3.6,3-9,4.2-12.6c1.2-3.6,1.8-9.6,3-13.2s3-9.6,4.8-12.6c1.8-3,4.2-7.8,6-11.4c1.8-3.6,3-8.4,4.2-12c1.2-3.6,3-7.2,3-7.2s7.8,3.6,10.8,6c3,2.4,7.2,8.4,10.2,10.2c3,1.8,9,3,12,3s10.2-3,13.2-5.4c3-2.4,7.8-6.6,9-10.2c1.2-3.6-1.8-11.4-2.4-15.6c-0.6-4.2,3.6-7.2,5.4-10.2c1.8-3,3.6-9.6,5.4-12.6c1.8-3,4.8-7.8,7.2-10.8s6.6-7.8,9.6-10.2c3-2.4,7.8-6,10.2-8.4c2.4-2.4,4.8-6.6,5.4-10.2c0.6-3.6-3-9.6-4.2-12.6c-1.2-3-4.8-6.6-6.6-10.2c-1.8-3.6-1.8-8.4,0-11.4c1.8-3,7.2-6,9.6-9c2.4-3,3.6-9,4.8-12.6c1.2-3.6,2.4-8.4,2.4-12.6s-1.8-9-3-12.6c-1.2-3.6-4.8-8.4-6.6-11.4c-1.8-3-4.2-7.8-6-10.8c-1.8-3-4.2-7.2-6-9.6c-1.8-2.4-6-4.2-8.4-3.6c-2.4,0.6-9.6,6.6-12,9c-2.4,2.4-7.2,5.4-10.2,7.2c-3,1.8-9,3-12,3c-3,0-7.8-3-10.2-5.4c-2.4-2.4-5.4-7.2-6.6-10.8s0-10.2,1.2-13.2c1.2-3,4.8-9,6-12c1.2-3,1.2-7.8,1.2-11.4s-1.8-9,0-12s6.6-6,9-9c2.4-3,4.8-9,5.4-12.6s-1.8-8.4-1.8-8.4s7.2-4.2,10.8-7.2c3.6-3,6-10.2,6-10.2s10.2,3.6,13.2,5.4c3,1.8,6,7.8,7.8,10.2c1.8,2.4,5.4,6.6,7.8,7.8c2.4,1.2,10.2,0.6,13.2-1.2c3-1.8,11.4-9,13.2-12.6c1.8-3.6,4.8-11.4,4.8-15.6c0-4.2-5.4-11.4-8.4-14.4c-3-3-9.6-7.2-12-9c-2.4-1.8-4.8-4.2-6-6.6s-2.4-7.2,0-9.6c2.4-2.4,9-6,11.4-7.2c2.4-1.2,11.4-3,13.8-1.2c2.4,1.8,6.6,9,9,11.4s6,6,8.4,6c2.4,0,9-6,10.8-9c1.8-3,5.4-10.2,7.8-12.6c2.4-2.4,11.4-5.4,14.4-4.8c3,0.6,10.2,4.8,12.6,7.2c2.4,2.4,9,9.6,11.4,12C295,3.4,299.8,7.6,299.8,7.6z"/>
-
-                        <!-- Pantnagar (North) -->
-                        <!-- Adjusted coordinates approx for new map path -->
-                        <g class="map-pin" id="pin-pantnagar" data-target="card-pantnagar" transform="translate(230, 200)">
-                            <circle cx="0" cy="0" r="6" />
-                            <text x="15" y="5">Pantnagar (MTech)</text>
+                    <svg class="india-svg" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+                        <path class="india-path" d="M156.4,45.8l-1.9,13.2l-15.3,1.9l-3.8,11.4l-15.3,1.9l-1.9,13.3l-13.4,7.6l-5.7,21l5.7,11.4l24.8,24.8l21,1.9l17.2,11.4l1.9,17.2l7.6,9.5l19.1,5.7l15.3,11.4l-1.9,19.1l-11.4,19.1l1.9,19.1l5.7,13.4l1.9,22.9l-11.4,24.8l-19.1,19.1l-9.5,13.4l-5.7,21l3.8,11.4l19.1,21l22.9,24.8l11.4,19.1l11.4,26.7l13.4,19.1l21,22.9l19.1,28.6l1.9,24.8l-11.4,32.4l-15.3,13.4l-11.4,1.9l-13.4-11.4l-21-1.9l-22.9,5.7l-15.3,5.7l-13.4,11.4l-13.4,5.7l-15.3-3.8l-7.6,11.4l1.9,13.3l-9.5,5.7l-13.4-3.8l-13.4,5.7l-15.3,3.8l-7.6,13.4l-3.8,15.3l1.9,21l11.4,11.4l1.9,13.3l-5.7,9.5l7.6,11.4l9.5-3.8l13.4,11.4l15.3,15.3l17.2,19.1l24.8,15.3l21,11.4l21,21l17.2,17.2l26.7,24.8l28.6,21l36.3,19.1l21,11.4l30.5-3.8l22.9-19.1l21-13.4l22.9-15.3l13.4-22.9l9.5-22.9l-5.7-22.9l-15.3-21l-3.8-22.9l3.8-19.1l11.4-13.4l11.4-13.4l5.7-19.1l1.9-21l-7.6-19.1l-13.4-11.4l-11.4-19.1l-1.9-15.3l11.4-13.4l11.4-11.4l21-1.9l19.1-13.4l9.5-17.2l3.8-21l3.8-21l-15.3-17.2l-11.4-13.4l-7.6-17.2l1.9-19.1l13.4-13.4l15.3-5.7l19.1,3.8l17.2-5.7l11.4-17.2l-1.9-21l-15.3-15.3l-1.9-15.3l13.4-11.4l5.7-11.4l-7.6-11.4l-11.4,3.8l-11.4-7.6l-1.9-11.4l11.4-13.4l7.6-15.3l-5.7-11.4l-13.4-1.9l-11.4-9.5l1.9-11.4l15.3-9.5l1.9-11.4l-11.4-9.5l-21-1.9l-13.4-9.5l-1.9-13.4l11.4-7.6l15.3-13.4l1.9-15.3l-13.4-13.4l-11.4-15.3l1.9-11.4l11.4-9.5l13.4,1.9l13.4-11.4l1.9-11.4l-15.3-13.4l-13.4-1.9l-9.5,9.5l-13.4-1.9l-15.3-9.5l-1.9-15.3l13.4-11.4l1.9-13.4l-13.4-9.5l-15.3,5.7l-9.5-11.4l-11.4,1.9l-1.9-13.4l11.4-9.5l1.9-15.3l-11.4-1.9l-11.4-11.4l1.9-13.4l15.3-5.7l1.9-15.3l-11.4-7.6l-15.3,1.9l-11.4-9.5l1.9-13.4l15.3-5.7l1.9-13.4l-11.4-7.6l-15.3,1.9L156.4,45.8z" />
+                        <g class="map-pin" id="pin-pantnagar" transform="translate(195, 120)">
+                            <circle class="pulse" cx="0" cy="0" r="10" />
+                            <circle class="main" cx="0" cy="0" r="6" />
+                            <text x="12" y="5">Pantnagar</text>
                         </g>
-
-                        <!-- Coimbatore (South) -->
-                        <g class="map-pin" id="pin-coimbatore" data-target="card-coimbatore" transform="translate(230, 650)">
-                            <circle cx="0" cy="0" r="6" />
-                            <text x="15" y="5">Coimbatore (PhD)</text>
+                        <g class="map-pin" id="pin-coimbatore" transform="translate(185, 480)">
+                            <circle class="pulse" cx="0" cy="0" r="10" />
+                            <circle class="main" cx="0" cy="0" r="6" />
+                            <text x="12" y="5">Coimbatore</text>
                         </g>
                     </svg>
                 </div>
 
-                <!-- Right: Timeline Cards -->
                 <div class="education-list reveal">
-                    <!-- PhD Card -->
-                    <div class="edu-card" id="card-coimbatore" onmouseenter="highlightMap('pin-coimbatore')" onmouseleave="resetMap()">
-                        <span class="year">2023 - 2026 (Expected)</span>
-                        <h3>PhD in Farm Machinery & Power</h3>
-                        <h4>TNAU, Coimbatore, Tamil Nadu</h4>
-                        <p>Specializing in Mechatronics and Robotics in Agriculture.</p>
-                        <p style="margin-top: 10px; font-size: 0.85rem;"><i class="fas fa-microchip"></i> <strong>Thesis:</strong> LIDAR based tractor mounted turmeric precision planter.</p>
+                    <div class="edu-card" onmouseenter="highlightMap('pin-coimbatore')" onmouseleave="resetMap()">
+                        <span style="color: var(--primary); font-weight: 700;">2023 - PRESENT</span>
+                        <h3>PhD in Farm Machinery</h3>
+                        <h4>TNAU, Coimbatore</h4>
+                        <p>Specializing in LIDAR-based precision planting and mechatronic monitoring systems.</p>
                     </div>
 
-                    <!-- MTech Card -->
-                    <div class="edu-card" id="card-pantnagar" onmouseenter="highlightMap('pin-pantnagar')" onmouseleave="resetMap()">
-                        <span class="year">2021 - 2023</span>
-                        <h3>MTech in Farm Machinery & Power</h3>
-                        <h4>GBPUA&T, Pantnagar, Uttarakhand</h4>
-                        <p><i class="fas fa-medal" style="color: gold;"></i> <strong>Gold Medallist (GPA: 8.26/10)</strong></p>
-                        <p style="margin-top: 10px; font-size: 0.85rem;"><strong>Thesis:</strong> Renewable Energy-Operated Paddy Thresher.</p>
+                    <div class="edu-card" onmouseenter="highlightMap('pin-pantnagar')" onmouseleave="resetMap()">
+                        <span style="color: var(--primary); font-weight: 700;">2021 - 2023</span>
+                        <h3>MTech in Farm Machinery</h3>
+                        <h4>GBPUA&T, Pantnagar</h4>
+                        <p><i class="fas fa-medal" style="color: var(--accent);"></i> University Gold Medallist</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section-padding">
+    <section id="projects" class="section-padding">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
+            <h2 class="section-title">Research Highlights</h2>
             <div class="exp-grid">
-                <div class="exp-card featured reveal">
-                    <!-- OFFICIAL MAHINDRA LOGO -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Mahindra_logo_2024.svg" alt="Mahindra Logo" class="company-logo-img">
-                    
-                    <h3>Mahindra & Mahindra</h3>
-                    <span class="role">Student Intern - Reliability Engineering</span>
-                    <span class="year" style="display:block; margin-bottom:15px; color:#999; font-size:0.85rem;">Jun 2025 - Aug 2025 | Chengalpattu</span>
-                    <ul>
-                        <li>Performed <strong>DFMEA</strong> on tractor tyres to enhance product reliability.</li>
-                        <li>Utilized <strong>Discrete Element Analysis (DEA)</strong> to predict rolling resistance.</li>
-                        <li>Contributed to critical R&D workflows in the Farm Division (MRV).</li>
-                    </ul>
-                </div>
-
-                <div class="exp-card reveal" style="transition-delay: 0.2s;">
-                    <!-- TAFE LOGO -->
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/27/TAFE_Logo.jpg/220px-TAFE_Logo.jpg" alt="TAFE Logo" class="company-logo-img">
-
-                    <h3>TAFE - Tractors and Farm Equipment</h3>
-                    <span class="role">Vocational Trainee</span>
-                    <span class="year" style="display:block; margin-bottom:15px; color:#999; font-size:0.85rem;">Jul 2021 (4 Weeks)</span>
-                    <ul>
-                        <li>Intensive training on "Tractor Systems and Controls".</li>
-                        <li>Gained hands-on exposure to manufacturing processes.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section-padding" style="background-color: #f8f9fa;">
-        <div class="container">
-            <h2 class="section-title">Research Projects</h2>
-            <div class="exp-grid">
-                <!-- Project 1 -->
-                <a href="#" class="project-card p-1 reveal">
-                    <div class="project-img">
-                        <i class="fas fa-robot"></i>
+                <!-- LIDAR Project Card -->
+                <div class="project-card reveal">
+                    <div class="project-img-container">
+                        <img src="project-lidar.jpg" alt="LIDAR Planter Project" onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80'">
                     </div>
                     <div class="project-content">
-                        <h3>LIDAR Precision Planter (PhD)</h3>
-                        <p>Design and development of a LIDAR-based tractor-mounted automatic turmeric precision planter with a low-cost mechatronic seed monitoring system.</p>
-                        <div class="tech-stack">
-                            <span class="tag">LIDAR</span>
-                            <span class="tag">Mechatronics</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Automation</span>
-                        </div>
+                        <span class="tag">PhD Thesis</span>
+                        <h3 style="margin: 15px 0 10px;">LIDAR Precision Planter</h3>
+                        <p>An autonomous turmeric planter using LIDAR for furrow sensing and seed spacing control.</p>
                     </div>
-                </a>
+                </div>
 
-                <!-- Project 2 -->
-                <a href="#" class="project-card p-2 reveal" style="transition-delay: 0.2s;">
-                    <div class="project-img">
-                        <i class="fas fa-leaf"></i>
+                <!-- Thresher Project Card (Linked) -->
+                <a href="renewable-paddy-thresher.html" target="_blank" class="project-card reveal" style="transition-delay: 0.1s;">
+                    <div class="project-img-container">
+                        <img src="project-thresher.jpg" alt="Paddy Thresher Project" onerror="this.src='https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=800&q=80'">
                     </div>
                     <div class="project-content">
-                        <h3>Renewable Paddy Thresher (MTech)</h3>
-                        <p>Structural Analysis of Paddy Threshing Drum and Development of Renewable Energy-Operated Paddy Thresher. Awarded Best Poster at ISAE Convention 2024.</p>
-                        <div class="tech-stack">
-                            <span class="tag">Structural Analysis</span>
-                            <span class="tag">Renewable Energy</span>
-                            <span class="tag">Design</span>
-                        </div>
+                        <span class="tag">MTech Award</span>
+                        <h3 style="margin: 15px 0 10px;">Renewable Paddy Thresher <i class="fas fa-external-link-alt" style="font-size: 0.8rem; margin-left: 5px; opacity: 0.6;"></i></h3>
+                        <p>Engineered a solar-powered threshing system for small-holder farmers. Awarded Best Poster 2024.</p>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section (NEW REDESIGN) -->
-    <section id="skills" class="section-padding">
+    <section id="skills" class="section-padding" style="background: #fff;">
         <div class="container">
-            <h2 class="section-title">Technical Expertise</h2>
-            
+            <h2 class="section-title">Technical Proficiency</h2>
             <div class="skills-grid-new reveal">
-                <!-- Design Card -->
                 <div class="skill-category-card">
-                    <div class="skill-icon-lg"><i class="fas fa-drafting-compass"></i></div>
-                    <h3>Design & CAD</h3>
-                    <div class="skill-tags">
+                    <div class="skill-icon-lg"><i class="fas fa-cube"></i></div>
+                    <h3>CAD & Simulation</h3>
+                    <div class="skill-chips">
                         <span class="skill-chip">SolidWorks (CSWA)</span>
                         <span class="skill-chip">AutoCAD</span>
-                        <span class="skill-chip">Farm Machinery</span>
+                        <span class="skill-chip">Ansys</span>
                     </div>
                 </div>
-
-                <!-- Analysis Card -->
                 <div class="skill-category-card">
-                    <div class="skill-icon-lg"><i class="fas fa-chart-line"></i></div>
-                    <h3>Analysis & Reliability</h3>
-                    <div class="skill-tags">
-                        <span class="skill-chip">DFMEA</span>
-                        <span class="skill-chip">DEA</span>
-                        <span class="skill-chip">Structural Analysis</span>
-                    </div>
-                </div>
-
-                <!-- Programming Card -->
-                <div class="skill-category-card">
-                    <div class="skill-icon-lg"><i class="fas fa-code"></i></div>
-                    <h3>Computation</h3>
-                    <div class="skill-tags">
+                    <div class="skill-icon-lg"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Computing</h3>
+                    <div class="skill-chips">
                         <span class="skill-chip">Python</span>
-                        <span class="skill-chip">R Language</span>
                         <span class="skill-chip">MATLAB</span>
-                        <span class="skill-chip">Mechatronics</span>
+                        <span class="skill-chip">R Language</span>
+                    </div>
+                </div>
+                <div class="skill-category-card">
+                    <div class="skill-icon-lg"><i class="fas fa-microchip"></i></div>
+                    <h3>Mechatronics</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip">Arduino</span>
+                        <span class="skill-chip">LIDAR Sensors</span>
+                        <span class="skill-chip">Automation</span>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <footer id="contact" class="section-padding">
+    <footer id="contact">
         <div class="container">
-            <h2 class="section-title" style="color: white; border-bottom-color: var(--accent);">Get In Touch</h2>
             <div class="contact-box reveal">
-                <h3 style="margin-bottom: 20px;">Ready to Innovate</h3>
-                <p>I am seeking challenging full-time R&D assignments starting <strong>September 2026</strong>.</p>
-                <div style="margin-top: 30px;">
+                <h2 style="margin-bottom: 20px;">Let's Build the Future of Ag-Tech</h2>
+                <div style="margin-bottom: 30px;">
                     <p><i class="fas fa-envelope"></i> vishal.phdfmp2023@tnau.ac.in</p>
                     <p><i class="fas fa-phone"></i> +91 7094328038</p>
                 </div>
                 <div class="social-icons">
-                    <a href="https://linkedin.com/in/vishal-saravanan-746565224"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://linkedin.com/in/vishal-saravanan-746565224" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     <a href="mailto:vishal.phdfmp2023@tnau.ac.in"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-            <p style="color: #666; font-size: 0.8rem;">&copy; 2026 Vishal S. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // --- SCROLL ANIMATION (Reveal on Scroll) ---
-        window.addEventListener('scroll', reveal);
-
         function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
-            for (var i = 0; i < reveals.length; i++) {
-                var windowheight = window.innerHeight;
-                var revealtop = reveals[i].getBoundingClientRect().top;
-                var revealpoint = 150;
-
-                if (revealtop < windowheight - revealpoint) {
-                    reveals[i].classList.add('active');
-                }
-            }
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(r => {
+                const windowHeight = window.innerHeight;
+                const elementTop = r.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) r.classList.add('active');
+            });
         }
-        // Trigger once on load
+        window.addEventListener('scroll', reveal);
         reveal();
 
-        // --- MAP INTERACTIVITY ---
-        // Function to highlight map pin when hovering over card
         function highlightMap(pinId) {
-            document.querySelectorAll('.map-pin').forEach(pin => pin.classList.remove('active'));
-            document.querySelectorAll('.edu-card').forEach(card => card.classList.remove('active'));
-            
-            const pin = document.getElementById(pinId);
-            if(pin) pin.classList.add('active');
+            document.querySelectorAll('.map-pin').forEach(p => p.classList.remove('active'));
+            document.getElementById(pinId).classList.add('active');
         }
-
-        // Function to reset map
         function resetMap() {
-            document.querySelectorAll('.map-pin').forEach(pin => pin.classList.remove('active'));
+            document.querySelectorAll('.map-pin').forEach(p => p.classList.remove('active'));
         }
-
-        // Function to highlight card when hovering over map pin
-        document.querySelectorAll('.map-pin').forEach(pin => {
-            pin.addEventListener('mouseenter', function() {
-                const targetId = this.getAttribute('data-target');
-                document.getElementById(targetId).classList.add('active');
-                this.classList.add('active');
-            });
-            pin.addEventListener('mouseleave', function() {
-                const targetId = this.getAttribute('data-target');
-                document.getElementById(targetId).classList.remove('active');
-                this.classList.remove('active');
-            });
-        });
     </script>
 </body>
 </html>
