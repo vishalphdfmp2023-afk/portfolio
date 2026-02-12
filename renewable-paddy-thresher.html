@@ -132,8 +132,8 @@
         /* --- SLIDESHOW VISUALS --- */
         .visual-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adaptive grid for 3 panels */
+            gap: 25px;
             margin-bottom: 50px;
         }
 
@@ -149,7 +149,7 @@
 
         .slideshow-container {
             width: 100%;
-            height: 350px;
+            height: 300px; /* Slightly reduced height for 3-column layout */
             background: #f8fafc;
             border-radius: 8px;
             margin-bottom: 15px;
@@ -179,24 +179,24 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Spreads image to fit panel window fully */
+            object-fit: cover;
             display: block;
         }
 
         /* Navigation dots for slideshow */
         .dots-container {
             position: absolute;
-            bottom: 15px;
+            bottom: 12px;
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             z-index: 10;
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             transition: all 0.3s;
@@ -205,12 +205,12 @@
 
         .dot.active {
             background: white;
-            width: 22px;
+            width: 18px;
             border-radius: 4px;
         }
 
         .caption {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             line-height: 1.5;
             flex-grow: 1;
@@ -286,9 +286,9 @@
         }
 
         @media (max-width: 850px) {
-            .visual-grid, .details-grid { grid-template-columns: 1fr; }
+            .details-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2.2rem; }
-            .slideshow-container { height: 280px; }
+            .slideshow-container { height: 250px; }
         }
     </style>
 </head>
@@ -330,10 +330,10 @@
             <div class="image-panel">
                 <div class="slideshow-container" id="slideshow-1">
                     <div class="slide active">
-                        <img src="cad-model.jpg" alt="CAD Design" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=CAD+Design+Assembly'">
+                        <img src="cad-model.jpg" alt="CAD Design" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=CAD+Design+Assembly'">
                     </div>
                     <div class="slide">
-                        <img src="fea-analysis.jpg" alt="FEA Analysis" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=FEA+Stress+Analysis'">
+                        <img src="fea-analysis.jpg" alt="FEA Analysis" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=FEA+Stress+Analysis'">
                     </div>
                     <div class="dots-container">
                         <div class="dot active"></div>
@@ -341,18 +341,18 @@
                     </div>
                 </div>
                 <div class="caption">
-                    <strong>Design & Structural Analysis:</strong> 3D CAD modeling followed by Finite Element Analysis (FEA) to validate the integration of <strong>GFRP bars</strong> for weight reduction.
+                    <strong>Design & Analysis:</strong> 3D modeling and FEA simulation of the drum to optimize weight and strength using <strong>GFRP material</strong>.
                 </div>
             </div>
 
-            <!-- Panel 2: Field Trial & Solar -->
+            <!-- Panel 2: Energy & Fabrication -->
             <div class="image-panel">
                 <div class="slideshow-container" id="slideshow-2">
                     <div class="slide active">
-                        <img src="solar-setup.jpg" alt="Solar Setup" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Solar+PV+Installation'">
+                        <img src="solar-setup.jpg" alt="Solar Setup" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Solar+PV+System'">
                     </div>
                     <div class="slide">
-                        <img src="field-trial.jpg" alt="Field Trial" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Field+Performance+Evaluation'">
+                        <img src="field-trial.jpg" alt="Field Trial" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Fabrication+Trials'">
                     </div>
                     <div class="dots-container">
                         <div class="dot active"></div>
@@ -360,7 +360,26 @@
                     </div>
                 </div>
                 <div class="caption">
-                    <strong>Energy & Field Results:</strong> Field evaluation of the thresher powered by a solar-PV system, showcasing carbon-neutral operation and high grain quality.
+                    <strong>Energy & Build:</strong> Implementation of the 300Wp Solar PV system and high-torque DC motor drive for sustainable operation.
+                </div>
+            </div>
+
+            <!-- Panel 3: Results & Graphs -->
+            <div class="image-panel">
+                <div class="slideshow-container" id="slideshow-3">
+                    <div class="slide active">
+                        <img src="graph-1.jpg" alt="Performance Graph 1" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Efficiency+vs+Speed'">
+                    </div>
+                    <div class="slide">
+                        <img src="graph-2.jpg" alt="Performance Graph 2" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Power+Consumption+Data'">
+                    </div>
+                    <div class="dots-container">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <div class="caption">
+                    <strong>Performance Data:</strong> Comparative analysis of threshing efficiency and power usage across varying drum speeds and moisture levels.
                 </div>
             </div>
         </div>
@@ -395,6 +414,7 @@
         // Automatic Slideshow Logic for 2 images per panel
         function initSlideshow(id) {
             const container = document.getElementById(id);
+            if (!container) return;
             const slides = container.querySelectorAll('.slide');
             const dots = container.querySelectorAll('.dot');
             let current = 0;
@@ -404,19 +424,20 @@
                 slides[current].classList.remove('active');
                 dots[current].classList.remove('active');
 
-                // Increment index (0 -> 1 -> 0)
+                // Increment index
                 current = (current + 1) % slides.length;
 
                 // Add active states
                 slides[current].classList.add('active');
                 dots[current].classList.add('active');
-            }, 4000); // 4 seconds transition
+            }, 4000); 
         }
 
         // Run when page loads
         document.addEventListener('DOMContentLoaded', () => {
             initSlideshow('slideshow-1');
             initSlideshow('slideshow-2');
+            initSlideshow('slideshow-3');
         });
     </script>
 
