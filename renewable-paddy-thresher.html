@@ -143,31 +143,35 @@
             border-radius: 12px;
             padding: 15px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
         }
 
         .img-placeholder {
             width: 100%;
-            height: 300px;
+            height: 350px; /* Fixed height for consistency */
             background: #f1f5f9;
             border-radius: 8px;
             margin-bottom: 15px;
+            overflow: hidden; /* Ensures image doesn't bleed out */
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px dashed #cbd5e1;
-            overflow: hidden;
+            border: 1px solid #cbd5e1;
         }
 
         .img-placeholder img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover; /* Spreads image to fill box fully */
+            display: block;
         }
 
         .caption {
             font-size: 0.9rem;
             color: var(--text-muted);
             line-height: 1.5;
+            flex-grow: 1;
         }
 
         .caption strong {
@@ -242,6 +246,7 @@
         @media (max-width: 850px) {
             .visual-grid, .details-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2.2rem; }
+            .img-placeholder { height: 250px; }
         }
     </style>
 </head>
@@ -281,7 +286,7 @@
         <div class="visual-grid">
             <div class="image-panel">
                 <div class="img-placeholder">
-                    <img src="thresher-cad-model.jpg" alt="CAD and FEA Analysis" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=FEA+Structural+Analysis'">
+                    <img src="thresher-cad-model.jpg" alt="CAD and FEA Analysis" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=FEA+Structural+Analysis'">
                 </div>
                 <div class="caption">
                     <strong>Structural Validation:</strong> Finite Element Analysis (FEA) performed on the threshing drum assembly to optimize material strength. Results validated <strong>GFRP bars</strong> as a sustainable alternative to Mild Steel.
@@ -289,7 +294,7 @@
             </div>
             <div class="image-panel">
                 <div class="img-placeholder">
-                    <img src="pv-system-layout.jpg" alt="Solar PV Setup" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Renewable+Drive+System'">
+                    <img src="pv-system-layout.jpg" alt="Solar PV Setup" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Renewable+Drive+System'">
                 </div>
                 <div class="caption">
                     <strong>Power Architecture:</strong> A standalone renewable energy system consisting of two 150 Wp solar panels driving a high-torque geared DC motor for off-grid farm operations.
