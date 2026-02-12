@@ -129,7 +129,7 @@
             font-weight: 600;
         }
 
-        /* --- VISUALS --- */
+        /* --- SLIDESHOW VISUALS --- */
         .visual-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -147,24 +147,65 @@
             flex-direction: column;
         }
 
-        .img-placeholder {
+        .slideshow-container {
             width: 100%;
-            height: 350px; /* Fixed height for consistency */
-            background: #f8fafc; /* Lighter background for the container */
+            height: 350px;
+            background: #f8fafc;
             border-radius: 8px;
             margin-bottom: 15px;
             overflow: hidden; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: relative;
             border: 1px solid #cbd5e1;
         }
 
-        .img-placeholder img {
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Resizes image to fit without cropping */
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             display: block;
+        }
+
+        /* Navigation dots for slideshow */
+        .dots-container {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            width: 20px;
+            border-radius: 4px;
         }
 
         .caption {
@@ -246,7 +287,7 @@
         @media (max-width: 850px) {
             .visual-grid, .details-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2.2rem; }
-            .img-placeholder { height: 250px; }
+            .slideshow-container { height: 280px; }
         }
     </style>
 </head>
@@ -284,20 +325,41 @@
         </section>
 
         <div class="visual-grid">
+            <!-- Panel 1: Design & Analysis -->
             <div class="image-panel">
-                <div class="img-placeholder">
-                    <img src="thresher-cad-model.jpg" alt="CAD and FEA Analysis" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=FEA+Structural+Analysis'">
+                <div class="slideshow-container" id="slideshow-1">
+                    <div class="slide active">
+                        <img src="cad-model.jpg" alt="CAD Model" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=CAD+Design+Assembly'">
+                    </div>
+                    <div class="slide">
+                        <img src="fea-analysis.jpg" alt="FEA Stress Analysis" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Drum+Stress+Simulation'">
+                    </div>
+                    <div class="dots-container">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                    </div>
                 </div>
                 <div class="caption">
-                    <strong>Structural Validation:</strong> Finite Element Analysis (FEA) performed on the threshing drum assembly to optimize material strength. Results validated <strong>GFRP bars</strong> as a sustainable alternative to Mild Steel.
+                    <strong>Design & Structural Analysis:</strong> 3D CAD modeling followed by Finite Element Analysis (FEA) to validate the integration of <strong>GFRP bars</strong> for weight reduction.
                 </div>
             </div>
+
+            <!-- Panel 2: Field Trial & Solar -->
             <div class="image-panel">
-                <div class="img-placeholder">
-                    <img src="pv-system-layout.jpg" alt="Solar PV Setup" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Renewable+Drive+System'">
+                <div class="slideshow-container" id="slideshow-2">
+                    <div class="slide active">
+                        <img src="solar-setup.jpg" alt="Solar Setup" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Solar+PV+Power+Source'">
+                    </div>
+                    <div class="slide">
+                        <img src="field-trial.jpg" alt="Field Trial" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Field+Performance+Trials'">
+                    </div>
+                    <div class="dots-container">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                    </div>
                 </div>
                 <div class="caption">
-                    <strong>Power Architecture:</strong> A standalone renewable energy system consisting of two 150 Wp solar panels driving a high-torque geared DC motor for off-grid farm operations.
+                    <strong>Energy & Field Results:</strong> Field evaluation of the thresher powered by a solar-PV system, showcasing carbon-neutral operation and high grain quality.
                 </div>
             </div>
         </div>
@@ -307,7 +369,7 @@
                 <h2>Thesis Objectives</h2>
                 <ul>
                     <li>Conducted static and dynamic structural analysis of threshing drum components using SolidWorks.</li>
-                    <li>Substituted traditional steel with Glass Fiber Reinforced Polymer (GFRP) to reduce rotational inertia and machine weight.</li>
+                    <li>Substituted traditional steel with Glass Fiber Reinforced Polymer (GFRP) to reduce machine weight.</li>
                     <li>Designed a robust mechanical drive system powered by a 450W DC motor.</li>
                     <li>Developed a portable system specifically for the topographical challenges of marginal hill farmers.</li>
                 </ul>
@@ -327,6 +389,35 @@
             <a href="index.html" class="back-link">← Return to Vishal S Portfolio</a>
         </footer>
     </div>
+
+    <script>
+        // Slideshow logic for pairs of images
+        function startSlideshow(id) {
+            const container = document.getElementById(id);
+            const slides = container.querySelectorAll('.slide');
+            const dots = container.querySelectorAll('.dot');
+            let current = 0;
+
+            setInterval(() => {
+                // Remove active class from current
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+
+                // Move to next (toggle between 0 and 1)
+                current = (current + 1) % slides.length;
+
+                // Add active class to next
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            }, 4000); // 4 seconds interval
+        }
+
+        // Initialize both slideshows
+        document.addEventListener('DOMContentLoaded', () => {
+            startSlideshow('slideshow-1');
+            startSlideshow('slideshow-2');
+        });
+    </script>
 
 </body>
 </html>
