@@ -169,7 +169,7 @@
             align-items: center;
             justify-content: center;
             color: var(--white);
-            padding-top: 100px;
+            padding-top: 100px; /* offset for fixed nav */
             padding-bottom: 50px;
             position: relative;
         }
@@ -201,6 +201,7 @@
             object-fit: cover;
             border: 8px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            /* Replace placeholder URL with your actual photo URL */
             background-color: #ddd; 
         }
 
@@ -241,7 +242,7 @@
             opacity: 0.7;
         }
 
-        /* --- EDUCATION ROADMAP --- */
+        /* --- EDUCATION ROADMAP (NEW) --- */
         .roadmap-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -250,6 +251,7 @@
             gap: 40px;
         }
 
+        /* Map Side */
         .map-container {
             flex: 1;
             min-width: 300px;
@@ -278,6 +280,7 @@
             transition: 0.3s;
         }
 
+        /* Map Pins */
         .map-pin {
             cursor: pointer;
             transition: 0.3s;
@@ -307,6 +310,7 @@
             opacity: 1;
         }
 
+        /* Content Side */
         .education-list {
             flex: 1;
             min-width: 300px;
@@ -314,9 +318,6 @@
             flex-direction: column;
             justify-content: center;
             padding: 20px 0;
-            border-left: 2px dashed #ddd;
-            margin-left: 30px;
-            padding-left: 30px;
         }
 
         .edu-card {
@@ -334,7 +335,7 @@
         .edu-card::before {
             content: '';
             position: absolute;
-            left: -46px;
+            left: -36px;
             top: 50%;
             transform: translateY(-50%);
             width: 20px;
@@ -344,6 +345,12 @@
             border-radius: 50%;
             z-index: 2;
             transition: 0.3s;
+        }
+        
+        .education-list {
+            border-left: 2px dashed #ddd;
+            margin-left: 30px;
+            padding-left: 30px;
         }
 
         .edu-card:hover, .edu-card.active {
@@ -416,26 +423,22 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
         }
 
-        .project-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .project-card:hover { transform: translateY(-5px); }
 
         .project-img {
-            height: 180px;
+            height: 200px;
+            background-color: #ddd;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #777;
             font-size: 3rem;
-            position: relative;
         }
         
-        /* Using class icons if images aren't found */
-        .p-1 .project-img { background: linear-gradient(45deg, #2E7D32, #81c784); }
-        .p-2 .project-img { background: linear-gradient(45deg, #1565C0, #64b5f6); }
+        .p-1 .project-img { background: linear-gradient(45deg, #2E7D32, #81c784); color: white; }
+        .p-2 .project-img { background: linear-gradient(45deg, #1565C0, #64b5f6); color: white; }
 
         .project-content { padding: 25px; flex: 1; }
         
@@ -455,7 +458,7 @@
             font-weight: 600;
         }
 
-        /* --- SKILLS --- */
+        /* --- NEW SKILLS GRID --- */
         .skills-grid-new {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -489,6 +492,15 @@
             display: inline-block;
         }
 
+        .skill-category-card h3 { margin-bottom: 15px; color: var(--dark); }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
         .skill-chip {
             border: 1px solid #ddd;
             padding: 5px 15px;
@@ -496,8 +508,6 @@
             font-size: 0.9rem;
             color: #666;
             font-weight: 500;
-            display: inline-block;
-            margin: 4px;
         }
 
         /* --- CONTACT --- */
@@ -517,6 +527,11 @@
             margin-bottom: 30px;
         }
 
+        .social-icons {
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+        
         .social-icons a {
             color: var(--white);
             margin: 0 15px;
@@ -528,7 +543,6 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: 0.3s;
         }
         
         .social-icons a:hover {
@@ -564,12 +578,14 @@
             transform: translateY(0);
         }
 
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
             .hero-container { flex-direction: column-reverse; text-align: center; }
             .hero-image { flex: 0 0 auto; margin-bottom: 30px; }
             .profile-pic { width: 250px; height: 250px; }
             .hero-content h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
+            
             .roadmap-wrapper { flex-direction: column; }
             .map-container { height: 400px; width: 100%; }
             .education-list { margin-left: 0; border-left: none; padding-left: 0; }
@@ -580,6 +596,7 @@
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav>
         <div class="container nav-content">
             <div class="logo">Vishal <span>S</span></div>
@@ -594,6 +611,7 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section id="hero">
         <div class="container hero-container">
             <div class="hero-text hero-content">
@@ -607,17 +625,20 @@
                 <div>
                     <a href="#contact" class="btn">Hire Me</a>
                     <a href="https://linkedin.com/in/vishal-saravanan-746565224" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <!-- RESUME BUTTON ADDED HERE -->
                     <a href="Vishal_S_Resume.pdf" download class="btn btn-outline"><i class="fas fa-file-download"></i> Resume</a>
                 </div>
             </div>
             
             <div class="hero-image">
+                <!-- PHOTO PLACEHOLDER: Replace src with your actual photo URL -->
                 <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vishal S" class="profile-pic">
             </div>
         </div>
         <a href="#about" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="section-padding">
         <div class="container">
             <h2 class="section-title">Who Am I?</h2>
@@ -629,17 +650,27 @@
         </div>
     </section>
 
+    <!-- Education Roadmap Section -->
     <section id="education" class="section-padding" style="background-color: #f0f4f0;">
         <div class="container">
             <h2 class="section-title">My Academic Journey</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #666;">Hover over the cards or the map points to see my path.</p>
+            
             <div class="roadmap-wrapper">
+                <!-- Left: Interactive Map -->
                 <div class="map-container reveal">
                     <svg class="india-svg" viewBox="0 0 612 792" xmlns="http://www.w3.org/2000/svg">
+                        <!-- ACCURATE INDIA PATH -->
                         <path class="india-path" d="M299.8,7.6c0,0-15.3,16.2-16.2,21c-0.9,4.8-10.8,3-14.4,1.8c-3.6-1.2-12,4.8-13.8,11.4c-1.8,6.6-4.2,2.4-7.8,3c-3.6,0.6-2.4,9-5.4,11.4c-3,2.4-8.4-1.8-10.2,3c-1.8,4.8-13.8,13.2-13.8,19.2c0,6,7.8,10.2,7.2,16.8c-0.6,6.6-6.6,12.6-6,17.4c0.6,4.8,2.4,15,0,18c-2.4,3-6.6,1.8-7.8,5.4c-1.2,3.6-1.2,12.6,2.4,14.4c3.6,1.8,13.8-3,18.6-1.2c4.8,1.8,13.2,10.2,16.2,12.6c3,2.4,13.2,1.2,18,3.6c4.8,2.4,3,9,3,13.2s3,4.2,3,9s4.8,10.2,10.2,12c5.4,1.8,10.8,5.4,12.6,9c1.8,3.6,1.2,10.2,1.2,14.4s-1.8,11.4,1.8,13.2c3.6,1.8,8.4-3.6,13.8-4.8c5.4-1.2,7.2,7.2,11.4,7.8c4.2,0.6,15-4.2,19.8-1.2c4.8,3,8.4,11.4,10.2,16.2s3,15.6,3,15.6s-1.8,9-1.8,13.8c0,4.8,3.6,6.6,3.6,10.2s-6.6,16.8-6,21.6c0.6,4.8,4.2,7.2,4.2,11.4c0,4.2-3.6,9.6-6,12.6s-9.6,7.2-10.8,12c-1.2,4.8,1.2,14.4,2.4,18c1.2,3.6,3.6,12.6,4.8,16.8c1.2,4.2,3.6,7.2,0,10.2c-3.6,3-18.6,39-21.6,42c-3,3-5.4,12.6-7.8,16.2c-2.4,3.6-7.8,6-10.2,9c-2.4,3-7.2,12-7.2,12s5.4,11.4,7.8,14.4c2.4,3,11.4,13.8,13.8,16.8c2.4,3,3,9,5.4,11.4c2.4,2.4,7.2,4.8,9,8.4c1.8,3.6,0.6,10.2,1.8,13.8c1.2,3.6,3,7.2,4.8,10.2c1.8,3,5.4,5.4,7.8,9s3,9.6,4.2,12.6c1.2,3,3,9.6,4.8,11.4c1.8,1.8,7.8,8.4,9,11.4c1.2,3,1.8,7.8,3.6,10.2c1.8,2.4,5.4,6.6,7.2,9.6c1.8,3,4.2,4.8,6,7.8c1.8,3,3.6,9.6,3.6,13.2c0,3.6-0.6,7.8-1.2,12s-3,8.4-4.2,11.4c-1.2,3-3.6,6-4.8,9.6c-1.2,3.6-3,6-4.8,7.8c-1.8,1.8-6,2.4-7.8,3.6c-1.8,1.2-6,0-7.8-1.2c-1.8-1.2-5.4-3.6-8.4-2.4c-3,1.2-10.2,9-12.6,10.8c-2.4,1.8-9,5.4-11.4,7.2c-2.4,1.8-7.2,3-9.6,2.4c-2.4-0.6-8.4-6-10.8-6.6c-2.4-0.6-10.8,1.8-13.8,2.4c-3,0.6-10.8-1.2-14.4-1.8c-3.6-0.6-8.4-3.6-11.4-4.8c-3-1.2-8.4-4.2-12-5.4c-3.6-1.2-12.6-5.4-15.6-7.2c-3-1.8-6.6-6-9-7.2c-2.4-1.2-8.4-2.4-11.4-3.6c-3-1.2-9.6-6-12.6-7.2c-3-1.2-10.2-2.4-13.2-3.6c-3-1.2-10.2-3.6-12.6-6s-6-8.4-8.4-11.4c-2.4-3-8.4-9.6-11.4-12c-3-2.4-6-5.4-9.6-6.6c-3.6-1.2-11.4-0.6-13.8,1.8c-2.4,2.4-3,11.4-4.2,14.4c-1.2,3-4.2,9.6-4.2,9.6s-3-3.6-5.4-4.8c-2.4-1.2-9-1.8-11.4-0.6c-2.4,1.2-6,7.2-7.8,9.6c-1.8,2.4-5.4,7.2-7.8,7.8c-2.4,0.6-7.8-3.6-9.6-5.4c-1.8-1.8-4.2-6.6-4.2-6.6s-5.4,3.6-8.4,4.2c-3,0.6-9.6-1.8-12-3c-2.4-1.2-6.6-5.4-9-6.6c-2.4-1.2-5.4-4.2-7.8-4.8c-2.4-0.6-6.6,1.8-9,2.4c-2.4,0.6-7.2-2.4-9.6-3.6c-2.4-1.2-7.8-4.2-10.8-4.2c-3,0-7.2,4.8-10.2,4.2c-3-0.6-9-7.2-11.4-9.6c-2.4-2.4-7.2-7.2-9.6-8.4c-2.4-1.2-9,0-12-1.2c-3-1.2-7.2-4.2-10.2-6.6s-4.8-6.6-7.2-9c-2.4-2.4-6.6-6.6-8.4-10.2c-1.8-3.6-4.2-12-4.2-12s3-6,5.4-9c2.4-3,5.4-9,6.6-12s3-7.8,4.2-10.2c1.2-2.4,4.2-6.6,5.4-9.6c1.2-3,1.2-7.8,0.6-11.4c-0.6-3.6-4.8-7.8-6-11.4c-1.2-3.6-0.6-8.4,0-12.6c0.6-4.2,4.2-7.2,5.4-10.8c1.2-3.6,1.8-9.6,3-13.2c1.2-3.6,3-9,4.2-12.6c1.2-3.6,1.8-9,2.4-12.6c0.6-3.6,0.6-8.4,1.2-12c0.6-3.6,1.8-9.6,3-13.2c1.2-3.6,3-9,4.2-12.6c1.2-3.6,1.8-9.6,3-13.2s3-9.6,4.8-12.6c1.8-3,4.2-7.8,6-11.4c1.8-3.6,3-8.4,4.2-12c1.2-3.6,3-7.2,3-7.2s7.8,3.6,10.8,6c3,2.4,7.2,8.4,10.2,10.2c3,1.8,9,3,12,3s10.2-3,13.2-5.4c3-2.4,7.8-6.6,9-10.2c1.2-3.6-1.8-11.4-2.4-15.6c-0.6-4.2,3.6-7.2,5.4-10.2c1.8-3,3.6-9.6,5.4-12.6c1.8-3,4.8-7.8,7.2-10.8s6.6-7.8,9.6-10.2c3-2.4,7.8-6,10.2-8.4c2.4-2.4,4.8-6.6,5.4-10.2c0.6-3.6-3-9.6-4.2-12.6c-1.2-3-4.8-6.6-6.6-10.2c-1.8-3.6-1.8-8.4,0-11.4c1.8-3,7.2-6,9.6-9c2.4-3,3.6-9,4.8-12.6c1.2-3.6,2.4-8.4,2.4-12.6s-1.8-9-3-12.6c-1.2-3.6-4.8-8.4-6.6-11.4c-1.8-3-4.2-7.8-6-10.8c-1.8-3-4.2-7.2-6-9.6c-1.8-2.4-6-4.2-8.4-3.6c-2.4,0.6-9.6,6.6-12,9c-2.4,2.4-7.2,5.4-10.2,7.2c-3,1.8-9,3-12,3c-3,0-7.8-3-10.2-5.4c-2.4-2.4-5.4-7.2-6.6-10.8s0-10.2,1.2-13.2c1.2-3,4.8-9,6-12c1.2-3,1.2-7.8,1.2-11.4s-1.8-9,0-12s6.6-6,9-9c2.4-3,4.8-9,5.4-12.6s-1.8-8.4-1.8-8.4s7.2-4.2,10.8-7.2c3.6-3,6-10.2,6-10.2s10.2,3.6,13.2,5.4c3,1.8,6,7.8,7.8,10.2c1.8,2.4,5.4,6.6,7.8,7.8c2.4,1.2,10.2,0.6,13.2-1.2c3-1.8,11.4-9,13.2-12.6c1.8-3.6,4.8-11.4,4.8-15.6c0-4.2-5.4-11.4-8.4-14.4c-3-3-9.6-7.2-12-9c-2.4-1.8-4.8-4.2-6-6.6s-2.4-7.2,0-9.6c2.4-2.4,9-6,11.4-7.2c2.4-1.2,11.4-3,13.8-1.2c2.4,1.8,6.6,9,9,11.4s6,6,8.4,6c2.4,0,9-6,10.8-9c1.8-3,5.4-10.2,7.8-12.6c2.4-2.4,11.4-5.4,14.4-4.8c3,0.6,10.2,4.8,12.6,7.2c2.4,2.4,9,9.6,11.4,12C295,3.4,299.8,7.6,299.8,7.6z"/>
+
+                        <!-- Pantnagar (North) -->
+                        <!-- Adjusted coordinates approx for new map path -->
                         <g class="map-pin" id="pin-pantnagar" data-target="card-pantnagar" transform="translate(230, 200)">
                             <circle cx="0" cy="0" r="6" />
                             <text x="15" y="5">Pantnagar (MTech)</text>
                         </g>
+
+                        <!-- Coimbatore (South) -->
                         <g class="map-pin" id="pin-coimbatore" data-target="card-coimbatore" transform="translate(230, 650)">
                             <circle cx="0" cy="0" r="6" />
                             <text x="15" y="5">Coimbatore (PhD)</text>
@@ -647,7 +678,9 @@
                     </svg>
                 </div>
 
+                <!-- Right: Timeline Cards -->
                 <div class="education-list reveal">
+                    <!-- PhD Card -->
                     <div class="edu-card" id="card-coimbatore" onmouseenter="highlightMap('pin-coimbatore')" onmouseleave="resetMap()">
                         <span class="year">2023 - 2026 (Expected)</span>
                         <h3>PhD in Farm Machinery & Power</h3>
@@ -656,6 +689,7 @@
                         <p style="margin-top: 10px; font-size: 0.85rem;"><i class="fas fa-microchip"></i> <strong>Thesis:</strong> LIDAR based tractor mounted turmeric precision planter.</p>
                     </div>
 
+                    <!-- MTech Card -->
                     <div class="edu-card" id="card-pantnagar" onmouseenter="highlightMap('pin-pantnagar')" onmouseleave="resetMap()">
                         <span class="year">2021 - 2023</span>
                         <h3>MTech in Farm Machinery & Power</h3>
@@ -668,12 +702,15 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
     <section id="experience" class="section-padding">
         <div class="container">
             <h2 class="section-title">Experience</h2>
             <div class="exp-grid">
                 <div class="exp-card featured reveal">
+                    <!-- OFFICIAL MAHINDRA LOGO -->
                     <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Mahindra_logo_2024.svg" alt="Mahindra Logo" class="company-logo-img">
+                    
                     <h3>Mahindra & Mahindra</h3>
                     <span class="role">Student Intern - Reliability Engineering</span>
                     <span class="year" style="display:block; margin-bottom:15px; color:#999; font-size:0.85rem;">Jun 2025 - Aug 2025 | Chengalpattu</span>
@@ -685,7 +722,9 @@
                 </div>
 
                 <div class="exp-card reveal" style="transition-delay: 0.2s;">
+                    <!-- TAFE LOGO -->
                     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/27/TAFE_Logo.jpg/220px-TAFE_Logo.jpg" alt="TAFE Logo" class="company-logo-img">
+
                     <h3>TAFE - Tractors and Farm Equipment</h3>
                     <span class="role">Vocational Trainee</span>
                     <span class="year" style="display:block; margin-bottom:15px; color:#999; font-size:0.85rem;">Jul 2021 (4 Weeks)</span>
@@ -698,37 +737,39 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects" class="section-padding" style="background-color: #f8f9fa;">
         <div class="container">
             <h2 class="section-title">Research Projects</h2>
             <div class="exp-grid">
-                <!-- Project 1 (Main page link or placeholder) -->
-                <div class="project-card p-1 reveal">
+                <!-- Project 1 -->
+                <a href="#" class="project-card p-1 reveal">
                     <div class="project-img">
                         <i class="fas fa-robot"></i>
                     </div>
                     <div class="project-content">
                         <h3>LIDAR Precision Planter (PhD)</h3>
-                        <p>Design and development of a LIDAR-based tractor-mounted automatic turmeric precision planter with mechatronic seed monitoring.</p>
+                        <p>Design and development of a LIDAR-based tractor-mounted automatic turmeric precision planter with a low-cost mechatronic seed monitoring system.</p>
                         <div class="tech-stack">
                             <span class="tag">LIDAR</span>
                             <span class="tag">Mechatronics</span>
                             <span class="tag">Python</span>
+                            <span class="tag">Automation</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- Project 2 (UPDATED LINK TO SUBPAGE) -->
-                <a href="renewable-paddy-thresher.html" class="project-card p-2 reveal" style="transition-delay: 0.2s;">
+                <!-- Project 2 -->
+                <a href="#" class="project-card p-2 reveal" style="transition-delay: 0.2s;">
                     <div class="project-img">
                         <i class="fas fa-leaf"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Renewable Paddy Thresher (MTech) <i class="fas fa-external-link-alt" style="font-size: 0.8rem; margin-left: 5px; opacity: 0.6;"></i></h3>
-                        <p>Development of a Renewable Energy-Operated Paddy Thresher. Awarded Best Poster at ISAE Convention 2024. Click to view details.</p>
+                        <h3>Renewable Paddy Thresher (MTech)</h3>
+                        <p>Structural Analysis of Paddy Threshing Drum and Development of Renewable Energy-Operated Paddy Thresher. Awarded Best Poster at ISAE Convention 2024.</p>
                         <div class="tech-stack">
                             <span class="tag">Structural Analysis</span>
-                            <span class="tag">Solar Energy</span>
+                            <span class="tag">Renewable Energy</span>
                             <span class="tag">Design</span>
                         </div>
                     </div>
@@ -737,30 +778,35 @@
         </div>
     </section>
 
+    <!-- Skills Section (NEW REDESIGN) -->
     <section id="skills" class="section-padding">
         <div class="container">
             <h2 class="section-title">Technical Expertise</h2>
+            
             <div class="skills-grid-new reveal">
+                <!-- Design Card -->
                 <div class="skill-category-card">
                     <div class="skill-icon-lg"><i class="fas fa-drafting-compass"></i></div>
                     <h3>Design & CAD</h3>
                     <div class="skill-tags">
                         <span class="skill-chip">SolidWorks (CSWA)</span>
                         <span class="skill-chip">AutoCAD</span>
-                        <span class="skill-chip">Ansys</span>
+                        <span class="skill-chip">Farm Machinery</span>
                     </div>
                 </div>
 
+                <!-- Analysis Card -->
                 <div class="skill-category-card">
                     <div class="skill-icon-lg"><i class="fas fa-chart-line"></i></div>
                     <h3>Analysis & Reliability</h3>
                     <div class="skill-tags">
                         <span class="skill-chip">DFMEA</span>
                         <span class="skill-chip">DEA</span>
-                        <span class="skill-chip">FEA</span>
+                        <span class="skill-chip">Structural Analysis</span>
                     </div>
                 </div>
 
+                <!-- Programming Card -->
                 <div class="skill-category-card">
                     <div class="skill-icon-lg"><i class="fas fa-code"></i></div>
                     <h3>Computation</h3>
@@ -768,12 +814,15 @@
                         <span class="skill-chip">Python</span>
                         <span class="skill-chip">R Language</span>
                         <span class="skill-chip">MATLAB</span>
+                        <span class="skill-chip">Mechatronics</span>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
+    <!-- Contact Section -->
     <footer id="contact" class="section-padding">
         <div class="container">
             <h2 class="section-title" style="color: white; border-bottom-color: var(--accent);">Get In Touch</h2>
@@ -789,33 +838,45 @@
                     <a href="mailto:vishal.phdfmp2023@tnau.ac.in"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-            <p style="color: #666; font-size: 0.8rem; margin-top: 30px;">&copy; 2026 Vishal S. All rights reserved.</p>
+            <p style="color: #666; font-size: 0.8rem;">&copy; 2026 Vishal S. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
+        // --- SCROLL ANIMATION (Reveal on Scroll) ---
         window.addEventListener('scroll', reveal);
+
         function reveal() {
             var reveals = document.querySelectorAll('.reveal');
             for (var i = 0; i < reveals.length; i++) {
                 var windowheight = window.innerHeight;
                 var revealtop = reveals[i].getBoundingClientRect().top;
-                if (revealtop < windowheight - 150) reveals[i].classList.add('active');
+                var revealpoint = 150;
+
+                if (revealtop < windowheight - revealpoint) {
+                    reveals[i].classList.add('active');
+                }
             }
         }
+        // Trigger once on load
         reveal();
 
+        // --- MAP INTERACTIVITY ---
+        // Function to highlight map pin when hovering over card
         function highlightMap(pinId) {
             document.querySelectorAll('.map-pin').forEach(pin => pin.classList.remove('active'));
             document.querySelectorAll('.edu-card').forEach(card => card.classList.remove('active'));
+            
             const pin = document.getElementById(pinId);
             if(pin) pin.classList.add('active');
         }
 
+        // Function to reset map
         function resetMap() {
             document.querySelectorAll('.map-pin').forEach(pin => pin.classList.remove('active'));
         }
 
+        // Function to highlight card when hovering over map pin
         document.querySelectorAll('.map-pin').forEach(pin => {
             pin.addEventListener('mouseenter', function() {
                 const targetId = this.getAttribute('data-target');
