@@ -179,14 +179,14 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover; /* Spreads image to fit panel window fully */
             display: block;
         }
 
         /* Navigation dots for slideshow */
         .dots-container {
             position: absolute;
-            bottom: 10px;
+            bottom: 15px;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -197,14 +197,15 @@
         .dot {
             width: 8px;
             height: 8px;
-            background: #cbd5e1;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
         .dot.active {
-            background: var(--primary);
-            width: 20px;
+            background: white;
+            width: 22px;
             border-radius: 4px;
         }
 
@@ -329,10 +330,10 @@
             <div class="image-panel">
                 <div class="slideshow-container" id="slideshow-1">
                     <div class="slide active">
-                        <img src="cad-model.jpg" alt="CAD Model" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=CAD+Design+Assembly'">
+                        <img src="cad-model.jpg" alt="CAD Design" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=CAD+Design+Assembly'">
                     </div>
                     <div class="slide">
-                        <img src="fea-analysis.jpg" alt="FEA Stress Analysis" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Drum+Stress+Simulation'">
+                        <img src="fea-analysis.jpg" alt="FEA Analysis" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=FEA+Stress+Analysis'">
                     </div>
                     <div class="dots-container">
                         <div class="dot active"></div>
@@ -348,10 +349,10 @@
             <div class="image-panel">
                 <div class="slideshow-container" id="slideshow-2">
                     <div class="slide active">
-                        <img src="solar-setup.jpg" alt="Solar Setup" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Solar+PV+Power+Source'">
+                        <img src="solar-setup.jpg" alt="Solar Setup" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Solar+PV+Installation'">
                     </div>
                     <div class="slide">
-                        <img src="field-trial.jpg" alt="Field Trial" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Field+Performance+Trials'">
+                        <img src="field-trial.jpg" alt="Field Trial" onerror="this.src='https://via.placeholder.com/800x600/eff6ff/1e40af?text=Field+Performance+Evaluation'">
                     </div>
                     <div class="dots-container">
                         <div class="dot active"></div>
@@ -391,31 +392,31 @@
     </div>
 
     <script>
-        // Slideshow logic for pairs of images
-        function startSlideshow(id) {
+        // Automatic Slideshow Logic for 2 images per panel
+        function initSlideshow(id) {
             const container = document.getElementById(id);
             const slides = container.querySelectorAll('.slide');
             const dots = container.querySelectorAll('.dot');
             let current = 0;
 
             setInterval(() => {
-                // Remove active class from current
+                // Remove active states
                 slides[current].classList.remove('active');
                 dots[current].classList.remove('active');
 
-                // Move to next (toggle between 0 and 1)
+                // Increment index (0 -> 1 -> 0)
                 current = (current + 1) % slides.length;
 
-                // Add active class to next
+                // Add active states
                 slides[current].classList.add('active');
                 dots[current].classList.add('active');
-            }, 4000); // 4 seconds interval
+            }, 4000); // 4 seconds transition
         }
 
-        // Initialize both slideshows
+        // Run when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            startSlideshow('slideshow-1');
-            startSlideshow('slideshow-2');
+            initSlideshow('slideshow-1');
+            initSlideshow('slideshow-2');
         });
     </script>
 
