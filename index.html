@@ -267,6 +267,16 @@
         }
         .exp-card.featured { border-top-color: var(--mahindra-red); }
         .exp-card:hover { transform: translateY(-10px); }
+        
+        .exp-featured-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         .company-logo-img {
             max-height: 60px;
             max-width: 150px;
@@ -374,6 +384,15 @@
         .award-card:hover { transform: translateY(-10px); }
         .award-card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--primary-dark); }
         .award-card .year { font-size: 0.95rem; color: var(--text-grey); margin-bottom: 10px; }
+        
+        .award-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
         /* Skills */
         .skills-wrapper {
@@ -555,6 +574,8 @@
             <h2 class="section-title">Experience</h2>
             <div class="exp-grid reveal">
                 <div class="exp-card featured">
+                    <!-- New MRV Chennai Image -->
+                    <img src="mrv_chennai.jpg" class="exp-featured-img" alt="MRV Chennai">
                     <img src="https://1000logos.net/wp-content/uploads/2020/04/Mahindra-Logo-2012.png" alt="Mahindra Logo" class="company-logo-img">
                     <h3>Mahindra and Mahindra Pvt Ltd</h3>
                     <span class="role">Student Intern, Reliability Engineering Team</span>
@@ -617,6 +638,7 @@
             <h2 class="section-title">Honors & Awards</h2>
             <div class="awards-grid reveal">
                 <div class="award-card">
+                    <img src="poster_award.jpg" class="award-img" alt="Best Poster Award">
                     <h3>Best Poster Presentation Award</h3>
                     <p class="year">November 2024</p>
                     <p>Master's Thesis at the 58th Indian Society of Agricultural Engineers (ISAE) Annual Convention, Parbhani, Maharashtra.</p>
