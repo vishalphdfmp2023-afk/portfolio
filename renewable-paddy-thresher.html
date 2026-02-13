@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Renewable Paddy Thresher | Vishal S</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Added FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* --- LIGHT BLUE & WHITE THEME --- */
+        /* --- GREEN & WHITE THEME (MATCHING PORTFOLIO) --- */
         :root {
-            --primary: #1e40af; /* Deep Blue */
-            --secondary: #3b82f6; /* Bright Blue */
-            --accent: #60a5fa; /* Light Blue */
-            --bg-color: #f8fafc; /* Crisp White/Slate */
+            --primary: #2E7D32; /* Green */
+            --secondary: #1B5E20; /* Dark Green */
+            --accent: #FFC107; /* Amber */
+            --bg-color: #f8f9fa; /* Light Grey */
             --card-bg: #ffffff;
             --card-border: #e2e8f0;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --text-main: #1a1a1a;
+            --text-muted: #555;
         }
 
         * {
@@ -32,16 +35,33 @@
             overflow-x: hidden;
         }
 
-        /* --- SUBTLE BACKGROUND DECOR --- */
+        /* --- HIGH-TECH HEADER BACKGROUND --- */
         .header-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            height: 450px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             z-index: -1;
-            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            overflow: hidden;
+        }
+
+        /* Blueprint Grid Effect */
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(46, 125, 50, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 125, 50, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
         }
 
         .container {
@@ -54,6 +74,7 @@
         header {
             text-align: center;
             margin-bottom: 60px;
+            padding-top: 20px;
         }
         
         .badge-row {
@@ -64,30 +85,34 @@
         }
 
         .project-tag {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             border: 1px solid var(--secondary);
             padding: 6px 18px;
-            border-radius: 4px;
-            font-size: 0.85rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--primary);
             text-transform: uppercase;
             letter-spacing: 1px;
+            backdrop-filter: blur(5px);
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--secondary);
             margin-bottom: 15px;
             letter-spacing: -0.02em;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.5);
         }
 
         .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
+            font-size: 1.15rem;
+            color: var(--text-main);
             max-width: 800px;
             margin: 0 auto;
+            font-weight: 500;
+            opacity: 0.8;
         }
 
         /* --- METRICS GRID --- */
@@ -95,63 +120,99 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .metric-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            padding: 25px;
+            padding: 30px 20px;
             border-radius: 12px;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .metric-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--secondary);
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px -5px rgba(46, 125, 50, 0.15);
         }
 
-        .metric-card span {
+        .metric-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
             display: block;
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--primary);
-            margin-bottom: 4px;
+            line-height: 1.2;
         }
 
-        .metric-card p {
+        .metric-label {
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: var(--text-muted);
             font-weight: 600;
+            margin-top: 5px;
         }
 
         /* --- SLIDESHOW VISUALS --- */
         .visual-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adaptive grid for 3 panels */
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         .image-panel {
             background: white;
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 4px; /* Sharper corners for tech look */
+            padding: 20px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .image-panel:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Tech Corner Accents */
+        .image-panel::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 20px; height: 20px;
+            border-top: 3px solid var(--primary);
+            border-left: 3px solid var(--primary);
+            border-top-left-radius: 4px;
+        }
+        .image-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 20px; height: 20px;
+            border-bottom: 3px solid var(--primary);
+            border-right: 3px solid var(--primary);
+            border-bottom-right-radius: 4px;
         }
 
         .slideshow-container {
             width: 100%;
-            height: 300px; /* Slightly reduced height for 3-column layout */
-            background: #f8fafc;
-            border-radius: 8px;
+            height: 280px;
+            background: #f1f5f9;
+            border-radius: 4px;
             margin-bottom: 15px;
             overflow: hidden; 
             position: relative;
@@ -160,107 +221,86 @@
 
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 0.8s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .slide.active {
-            opacity: 1;
-            z-index: 1;
-        }
+        .slide.active { opacity: 1; z-index: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
 
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Navigation dots for slideshow */
         .dots-container {
-            position: absolute;
-            bottom: 12px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            z-index: 10;
+            position: absolute; bottom: 12px; width: 100%;
+            display: flex; justify-content: center; gap: 8px; z-index: 10;
         }
 
         .dot {
-            width: 7px;
-            height: 7px;
-            background: rgba(255, 255, 255, 0.5);
+            width: 8px; height: 8px;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
+            cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
-
-        .dot.active {
-            background: white;
-            width: 18px;
-            border-radius: 4px;
-        }
+        .dot.active { background: var(--primary); transform: scale(1.2); }
 
         .caption {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 1.5;
-            flex-grow: 1;
+            line-height: 1.6;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 15px;
         }
-
-        .caption strong {
-            color: var(--primary);
-        }
+        .caption strong { color: var(--secondary); }
 
         /* --- TECHNICAL CONTENT --- */
         .details-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 60px;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .detail-box {
+            padding: 30px;
+            background: #fff;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
 
         .detail-box h2 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
+        
+        .detail-box h2 i { font-size: 1.4rem; color: var(--accent); }
 
-        .detail-box h2::after {
-            content: '';
-            flex-grow: 1;
-            height: 2px;
-            background: #e2e8f0;
-        }
-
-        .detail-box ul {
-            list-style: none;
-        }
+        .detail-box ul { list-style: none; }
 
         .detail-box li {
             position: relative;
-            padding-left: 25px;
-            margin-bottom: 12px;
+            padding-left: 30px;
+            margin-bottom: 15px;
             color: var(--text-main);
         }
 
         .detail-box li::before {
-            content: '→';
+            content: '\f058'; /* FontAwesome Check Circle */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
             position: absolute;
-            left: 0;
-            color: var(--secondary);
-            font-weight: bold;
+            left: 0; top: 2px;
+            color: var(--primary);
+            font-size: 1rem;
         }
 
         /* --- FOOTER --- */
@@ -268,27 +308,46 @@
             text-align: center;
             padding-top: 40px;
             border-top: 1px solid #e2e8f0;
+            margin-bottom: 40px;
         }
 
         .back-link {
             text-decoration: none;
-            color: var(--primary);
-            font-weight: 700;
+            color: white;
+            background: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
             font-size: 1rem;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            transition: gap 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
         }
 
         .back-link:hover {
+            transform: translateY(-3px);
+            background: var(--secondary);
             gap: 15px;
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         @media (max-width: 850px) {
             .details-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2.2rem; }
             .slideshow-container { height: 250px; }
+            .header-bg { height: 500px; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); }
         }
     </style>
 </head>
@@ -297,43 +356,48 @@
     <div class="header-bg"></div>
 
     <div class="container">
-        <header>
+        <header class="reveal">
             <div class="badge-row">
-                <span class="project-tag">MTech Thesis Project</span>
-                <span class="project-tag" style="border-color:#b45309; color:#b45309;">Gold Medal Work</span>
+                <span class="project-tag"><i class="fas fa-graduation-cap"></i> MTech Thesis</span>
+                <span class="project-tag" style="border-color:#b45309; color:#b45309;"><i class="fas fa-medal"></i> Gold Medal Work</span>
             </div>
             <h1>Renewable Energy Operated Paddy Thresher</h1>
             <p class="subtitle">Structural Analysis of Paddy Threshing Drum and Development of a Sustainable, Solar-Powered Threshing System for Hill Topography.</p>
         </header>
 
-        <section class="metrics-grid">
+        <section class="metrics-grid reveal">
             <div class="metric-card">
-                <span>96.8%</span>
-                <p>Threshing Efficiency</p>
+                <div class="metric-icon"><i class="fas fa-chart-line"></i></div>
+                <!-- data-target holds the final number, data-suffix holds the unit -->
+                <span class="metric-value" data-target="96.8" data-suffix="%">0%</span>
+                <p class="metric-label">Threshing Efficiency</p>
             </div>
             <div class="metric-card">
-                <span>152</span>
-                <p>Feed Rate (kg/h)</p>
+                <div class="metric-icon"><i class="fas fa-weight-hanging"></i></div>
+                <span class="metric-value" data-target="152" data-suffix="">0</span>
+                <p class="metric-label">Feed Rate (kg/h)</p>
             </div>
             <div class="metric-card">
-                <span>450 W</span>
-                <p>DC Power Drive</p>
+                <div class="metric-icon"><i class="fas fa-bolt"></i></div>
+                <span class="metric-value" data-target="450" data-suffix=" W">0</span>
+                <p class="metric-label">DC Power Drive</p>
             </div>
             <div class="metric-card">
-                <span>3.01%</span>
-                <p>MOG Content</p>
+                <div class="metric-icon"><i class="fas fa-leaf"></i></div>
+                <span class="metric-value" data-target="3.01" data-suffix="%">0%</span>
+                <p class="metric-label">MOG Content</p>
             </div>
         </section>
 
-        <div class="visual-grid">
+        <div class="visual-grid reveal">
             <!-- Panel 1: Design & Analysis -->
             <div class="image-panel">
                 <div class="slideshow-container" id="slideshow-1">
                     <div class="slide active">
-                        <img src="cad-model.jpg" alt="CAD Design" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=CAD+Design+Assembly'">
+                        <img src="cad-model.jpg" alt="CAD Design" onerror="this.src='https://via.placeholder.com/600x400/e8f5e9/2E7D32?text=CAD+Design+Assembly'">
                     </div>
                     <div class="slide">
-                        <img src="fea-analysis.jpg" alt="FEA Analysis" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=FEA+Stress+Analysis'">
+                        <img src="fea-analysis.jpg" alt="FEA Analysis" onerror="this.src='https://via.placeholder.com/600x400/e8f5e9/2E7D32?text=FEA+Stress+Analysis'">
                     </div>
                     <div class="dots-container">
                         <div class="dot active"></div>
@@ -341,7 +405,7 @@
                     </div>
                 </div>
                 <div class="caption">
-                    <strong>Design & Analysis:</strong> 3D modeling and FEA simulation of the drum to optimize weight and strength using <strong>GFRP material</strong>.
+                    <strong><i class="fas fa-drafting-compass"></i> Design & Analysis:</strong> 3D modeling and FEA simulation of the drum to optimize weight and strength using <strong>GFRP material</strong>.
                 </div>
             </div>
 
@@ -349,10 +413,10 @@
             <div class="image-panel">
                 <div class="slideshow-container" id="slideshow-2">
                     <div class="slide active">
-                        <img src="solar-setup.jpg" alt="Solar Setup" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Solar+PV+System'">
+                        <img src="solar-setup.jpg" alt="Solar Setup" onerror="this.src='https://via.placeholder.com/600x400/e8f5e9/2E7D32?text=Solar+PV+System'">
                     </div>
                     <div class="slide">
-                        <img src="field-trial.jpg" alt="Field Trial" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Fabrication+Trials'">
+                        <img src="field-trial.jpg" alt="Field Trial" onerror="this.src='https://via.placeholder.com/600x400/e8f5e9/2E7D32?text=Fabrication+Trials'">
                     </div>
                     <div class="dots-container">
                         <div class="dot active"></div>
@@ -360,7 +424,7 @@
                     </div>
                 </div>
                 <div class="caption">
-                    <strong>Energy & Build:</strong> Implementation of the 300Wp Solar PV system and high-torque DC motor drive for sustainable operation.
+                    <strong><i class="fas fa-solar-panel"></i> Energy & Build:</strong> Implementation of the 300Wp Solar PV system and high-torque DC motor drive for sustainable operation.
                 </div>
             </div>
 
@@ -368,10 +432,10 @@
             <div class="image-panel">
                 <div class="slideshow-container" id="slideshow-3">
                     <div class="slide active">
-                        <img src="graph-1.jpg" alt="Performance Graph 1" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Efficiency+vs+Speed'">
+                        <img src="graph-1.jpg" alt="Performance Graph 1" onerror="this.src='https://via.placeholder.com/600x400/e8f5e9/2E7D32?text=Efficiency+vs+Speed'">
                     </div>
                     <div class="slide">
-                        <img src="graph-2.jpg" alt="Performance Graph 2" onerror="this.src='https://via.placeholder.com/600x400/eff6ff/1e40af?text=Power+Consumption+Data'">
+                        <img src="graph-2.jpg" alt="Performance Graph 2" onerror="this.src='https://via.placeholder.com/600x400/e8f5e9/2E7D32?text=Power+Consumption+Data'">
                     </div>
                     <div class="dots-container">
                         <div class="dot active"></div>
@@ -379,14 +443,27 @@
                     </div>
                 </div>
                 <div class="caption">
-                    <strong>Performance Data:</strong> Comparative analysis of threshing efficiency and power usage across varying drum speeds and moisture levels.
+                    <strong><i class="fas fa-chart-bar"></i> Performance Data:</strong> Comparative analysis of threshing efficiency and power usage across varying drum speeds and moisture levels.
                 </div>
             </div>
         </div>
 
-        <div class="details-grid">
+        <div class="details-grid reveal">
+            <!-- NEW: Problem Statement -->
             <div class="detail-box">
-                <h2>Thesis Objectives</h2>
+                <h2><i class="fas fa-exclamation-triangle"></i> Problem Statement</h2>
+                <p>Agricultural mechanization in hilly regions is currently hindered by a critical trade-off: farmers are forced to choose between <strong>portable but low-capacity</strong> mini threshers or <strong>high-capacity machines that are too heavy</strong> to transport across difficult terrain. This lack of suitable machinery perpetuates manual drudgery and limits productivity.</p>
+            </div>
+
+            <!-- NEW: Hypothesis -->
+            <div class="detail-box">
+                <h2><i class="fas fa-lightbulb"></i> Hypothesis</h2>
+                <p>By substituting conventional Mild Steel with lightweight <strong>Glass Fiber Reinforced Polymer (GFRP)</strong> and integrating a precisely sized <strong>DC motor with a Solar PV system</strong>, we can create a thresher that is both highly portable and sustainable—effectively bridging the gap for marginal hill farmers.</p>
+            </div>
+
+            <!-- EXISTING: Objectives -->
+            <div class="detail-box">
+                <h2><i class="fas fa-bullseye"></i> Thesis Objectives</h2>
                 <ul>
                     <li>Conducted static and dynamic structural analysis of threshing drum components using SolidWorks.</li>
                     <li>Substituted traditional steel with Glass Fiber Reinforced Polymer (GFRP) to reduce machine weight.</li>
@@ -394,8 +471,10 @@
                     <li>Developed a portable system specifically for the topographical challenges of marginal hill farmers.</li>
                 </ul>
             </div>
+
+            <!-- EXISTING: Outcomes -->
             <div class="detail-box">
-                <h2>Key Outcomes</h2>
+                <h2><i class="fas fa-clipboard-check"></i> Key Outcomes</h2>
                 <ul>
                     <li>Successfully threshed paddy at 14% moisture content with minimal grain damage.</li>
                     <li>Achieved peak solar generation of 198.72 W during field trials.</li>
@@ -405,13 +484,69 @@
             </div>
         </div>
 
-        <footer class="action-footer">
-            <a href="index.html" class="back-link">← Return to Vishal S Portfolio</a>
+        <footer class="action-footer reveal">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Return to Portfolio</a>
         </footer>
     </div>
 
     <script>
-        // Automatic Slideshow Logic for 2 images per panel
+        // --- 1. Reveal on Scroll ---
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // If this is the metrics grid, start counting
+                    if (entry.target.classList.contains('metrics-grid')) {
+                        startCounters();
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+        // --- 2. Number Counter Animation ---
+        let countersStarted = false;
+        function startCounters() {
+            if (countersStarted) return;
+            countersStarted = true;
+
+            const counters = document.querySelectorAll('.metric-value');
+            const speed = 200; // The lower the slower
+
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText.replace(/[^\d.]/g, ''); // strip non-numeric for calculation
+                    const suffix = counter.getAttribute('data-suffix');
+                    
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        // Formatting: check if integer or float
+                        let nextVal = count + inc;
+                        if(Number.isInteger(target)) {
+                            counter.innerText = Math.ceil(nextVal) + suffix;
+                        } else {
+                            counter.innerText = nextVal.toFixed(2) + suffix; // assuming 2 decimal places max
+                        }
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target + suffix;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // --- 3. Slideshow Logic ---
         function initSlideshow(id) {
             const container = document.getElementById(id);
             if (!container) return;
@@ -420,24 +555,21 @@
             let current = 0;
 
             setInterval(() => {
-                // Remove active states
                 slides[current].classList.remove('active');
                 dots[current].classList.remove('active');
-
-                // Increment index
                 current = (current + 1) % slides.length;
-
-                // Add active states
                 slides[current].classList.add('active');
                 dots[current].classList.add('active');
             }, 4000); 
         }
 
-        // Run when page loads
         document.addEventListener('DOMContentLoaded', () => {
             initSlideshow('slideshow-1');
             initSlideshow('slideshow-2');
             initSlideshow('slideshow-3');
+            
+            // Force reveal header immediately
+            document.querySelector('header').classList.add('active');
         });
     </script>
 
