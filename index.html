@@ -77,6 +77,11 @@
             background: transparent;
             border: 2px solid var(--white);
             color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 5px;
+            display: inline-block;
         }
         .btn-outline:hover {
             background: var(--white);
@@ -124,6 +129,7 @@
         }
         .nav-links a:hover { color: var(--primary); }
         .nav-links a:hover::after { width: 100%; }
+        
         #hero {
             min-height: 100vh;
             background: linear-gradient(rgba(20,50,20,0.85), rgba(20,50,20,0.75)),
@@ -156,6 +162,7 @@
             object-fit: cover;
             border: 8px solid rgba(255,255,255,0.2);
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            object-position: top; 
         }
         .hero-content h1 { font-size: 3.5rem; margin-bottom: 10px; line-height: 1.2; }
         .hero-content h2 { font-size: 1.5rem; font-weight: 300; margin-bottom: 25px; color: #ddd; }
@@ -195,39 +202,49 @@
             40% { transform: translateX(-50%) translateY(-10px); }
             60% { transform: translateX(-50%) translateY(-5px); }
         }
-        /* University Cards (Education) */
+
+        /* 3D University Cards (Education) */
         .university-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 50px;
             margin-top: 40px;
+            perspective: 1000px;
         }
         .university-card {
             background: var(--white);
             border-radius: 15px;
-            overflow: hidden;
             box-shadow: var(--shadow);
-            transition: 0.3s;
+            transition: transform 0.1s; /* Faster for 3D effect */
+            transform-style: preserve-3d;
+            position: relative;
+            cursor: pointer;
         }
-        .university-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
+        
         .uni-image {
             height: 280px;
             background-size: cover;
             background-position: center;
             position: relative;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            transform: translateZ(20px); 
         }
         .uni-image::after {
             content: '';
             position: absolute;
             inset: 0;
             background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
         }
         .uni-content {
             padding: 25px;
             text-align: center;
+            transform: translateZ(40px);
+            background: var(--white);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
         }
         .uni-content h3 { font-size: 1.6rem; margin-bottom: 8px; color: var(--primary-dark); }
         .uni-content h4 { font-size: 1.1rem; color: var(--primary); margin-bottom: 12px; }
@@ -359,45 +376,51 @@
         .award-card .year { font-size: 0.95rem; color: var(--text-grey); margin-bottom: 10px; }
 
         /* Skills */
-        .skills-grid-new {
+        .skills-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
         }
-        .skill-category-card {
+        .skill-group h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--primary-dark);
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+        }
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .software-card {
             background: var(--white);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: var(--shadow);
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: 0.3s;
-            border-bottom: 5px solid transparent;
         }
-        .skill-category-card:hover {
-            transform: translateY(-5px);
-            border-bottom-color: var(--primary);
-        }
-        .skill-icon-lg {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
+        .software-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .circle-wrap {
+            margin: 0 auto 15px;
+            width: 100px;
+            height: 100px;
             background: #e8f5e9;
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
             border-radius: 50%;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
-        .skill-chip {
-            border: 1px solid #ddd;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: #666;
-            font-weight: 500;
-            display: inline-block;
-            margin: 4px;
-        }
+        .circle-wrap i { font-size: 2.5rem; color: var(--primary); }
+        .software-name { font-weight: 600; color: var(--dark); }
+        .software-level { font-size: 0.8rem; color: var(--text-grey); }
+
+        .lang-item { margin-bottom: 20px; }
+        .lang-info { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 500; }
+        .progress-bg { height: 10px; background: #ddd; border-radius: 5px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--primary); border-radius: 5px; width: 0; transition: width 1.5s ease-in-out; }
 
         /* Contact Footer */
         #contact-footer {
@@ -441,6 +464,7 @@
             .nav-links { display: none; }
             .university-grid { grid-template-columns: 1fr; }
             .research-grid { grid-template-columns: 1fr; }
+            .skills-wrapper { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -478,7 +502,8 @@
                 </div>
             </div>
             <div class="hero-image reveal active">
-                <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vishal S" class="profile-pic">
+                <!-- PHOTO REPLACEMENT -->
+                <img src="Vishal.jpg" alt="Vishal S" class="profile-pic">
             </div>
         </div>
         <a href="#about" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
@@ -497,9 +522,9 @@
         <div class="container">
             <h2 class="section-title">Education</h2>
             <div class="university-grid reveal">
-                <!-- PhD - TNAU -->
-                <div class="university-card">
-                    <div class="uni-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/TNAU_Century_Block.jpg/800px-TNAU_Century_Block.jpg');"></div>
+                <!-- PhD - TNAU (Local File: tnau.jpg) -->
+                <div class="university-card" data-tilt>
+                    <div class="uni-image" style="background-image: url('tnau.jpg');"></div>
                     <div class="uni-content">
                         <h3>PhD in Farm Machinery and Power Engineering</h3>
                         <h4>TNAU, Coimbatore, Tamil Nadu</h4>
@@ -509,9 +534,9 @@
                     </div>
                 </div>
 
-                <!-- MTech - GBPUA&T -->
-                <div class="university-card">
-                    <div class="uni-image" style="background-image: url('https://www.gbpuat.ac.in/gallery/images/convocation/convocation-main.jpg');"></div>
+                <!-- MTech - GBPUA&T (Local File: gbpuat.jpg) -->
+                <div class="university-card" data-tilt>
+                    <div class="uni-image" style="background-image: url('gbpuat.jpg');"></div>
                     <div class="uni-content">
                         <h3>MTech in Farm Machinery and Power Engineering</h3>
                         <h4>GBPUA&T, Pantnagar, Uttarakhand</h4>
@@ -613,26 +638,57 @@
     <section id="skills" class="section-padding" style="background:#f0f8f4;">
         <div class="container">
             <h2 class="section-title">Relevant Skills</h2>
-            <div class="skills-grid-new reveal">
-                <div class="skill-category-card">
-                    <div class="skill-icon-lg"><i class="fas fa-drafting-compass"></i></div>
-                    <h3>Design & CAD</h3>
-                    <span class="skill-chip">Certified SolidWorks Associate (CSWA) - Dassault Systèmes - C-NMYUG6FC87</span>
-                    <span class="skill-chip">AutoCAD</span>
+            <div class="skills-wrapper reveal">
+                <div class="skill-group">
+                    <h3>Design & Analysis Tools</h3>
+                    <div class="software-grid">
+                        <div class="software-card">
+                            <div class="circle-wrap"><i class="fas fa-cube"></i></div>
+                            <div class="software-name">SolidWorks</div>
+                            <div class="software-level">CSWA Certified</div>
+                        </div>
+                        <div class="software-card">
+                            <div class="circle-wrap"><i class="fab fa-python"></i></div>
+                            <div class="software-name">Python</div>
+                            <div class="software-level">Data Analysis</div>
+                        </div>
+                        <div class="software-card">
+                            <div class="circle-wrap"><i class="fas fa-chart-bar"></i></div>
+                            <div class="software-name">R Language</div>
+                            <div class="software-level">Statistical Computing</div>
+                        </div>
+                        <div class="software-card">
+                            <div class="circle-wrap"><i class="fas fa-cogs"></i></div>
+                            <div class="software-name">AutoCAD</div>
+                            <div class="software-level">2D Drafting</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-category-card">
-                    <div class="skill-icon-lg"><i class="fas fa-code"></i></div>
-                    <h3>Programming & Analysis</h3>
-                    <span class="skill-chip">Python</span>
-                    <span class="skill-chip">R</span>
-                    <span class="skill-chip">Matlab</span>
-                </div>
-                <div class="skill-category-card">
-                    <div class="skill-icon-lg"><i class="fas fa-globe"></i></div>
+
+                <div class="skill-group">
                     <h3>Languages</h3>
-                    <span class="skill-chip">Tamil ★★★★☆</span>
-                    <span class="skill-chip">English ★★★★☆</span>
-                    <span class="skill-chip">Hindi ★★☆☆☆</span>
+                    <div style="background:white; padding:30px; border-radius:15px; box-shadow:var(--shadow);">
+                        <div class="lang-item">
+                            <div class="lang-info"><span>English</span><span>Professional</span></div>
+                            <div class="progress-bg"><div class="progress-bar" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="lang-item">
+                            <div class="lang-info"><span>Tamil</span><span>Native</span></div>
+                            <div class="progress-bg"><div class="progress-bar" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="lang-item">
+                            <div class="lang-info"><span>Hindi</span><span>Intermediate</span></div>
+                            <div class="progress-bg"><div class="progress-bar" style="width: 50%;"></div></div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top:30px;">Core Competencies</h3>
+                    <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                        <span style="background:#e8f5e9; color:var(--primary-dark); padding:8px 15px; border-radius:20px; font-weight:600;">Precision Agriculture</span>
+                        <span style="background:#e8f5e9; color:var(--primary-dark); padding:8px 15px; border-radius:20px; font-weight:600;">Mechatronics</span>
+                        <span style="background:#e8f5e9; color:var(--primary-dark); padding:8px 15px; border-radius:20px; font-weight:600;">LIDAR Systems</span>
+                        <span style="background:#e8f5e9; color:var(--primary-dark); padding:8px 15px; border-radius:20px; font-weight:600;">Farm Machinery Design</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -654,6 +710,7 @@
     </section>
 
     <script>
+        // Reveal on Scroll
         function reveal() {
             document.querySelectorAll(".reveal").forEach(el => {
                 const rect = el.getBoundingClientRect();
@@ -661,9 +718,47 @@
                     el.classList.add("active");
                 }
             });
+            const skillsSection = document.getElementById('skills');
+            const bars = document.querySelectorAll('.progress-bar');
+            if(skillsSection && skillsSection.getBoundingClientRect().top < window.innerHeight - 150) {
+                 bars.forEach(bar => {
+                    const width = bar.style.width;
+                    if(bar.clientWidth === 0) { 
+                        bar.style.width = '0';
+                        setTimeout(() => bar.style.width = width, 100);
+                    }
+                 });
+            }
         }
         window.addEventListener("scroll", reveal);
         reveal();
+
+        // 3D Tilt Effect Logic (Vanilla JS)
+        const tiltCards = document.querySelectorAll('[data-tilt]');
+        
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Calculate center
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Calculate rotation (Max 15deg)
+                const rotateX = ((y - centerY) / centerY) * -15; 
+                const rotateY = ((x - centerX) / centerX) * 15;
+
+                // Apply transform
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                // Reset transform
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
     </script>
 </body>
 </html>
