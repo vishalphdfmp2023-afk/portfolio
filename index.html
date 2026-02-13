@@ -132,7 +132,7 @@
         
         #hero {
             min-height: 100vh;
-            background: linear-gradient(rgba(20,50,20,0.85), rgba(20,50,20,0.75)),
+            background: linear-gradient(rgba(20,50,20,0.9), rgba(20,50,20,0.85)),
                         url('https://images.unsplash.com/photo-1625246333195-58197bd47d26?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
@@ -140,54 +140,91 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
             padding-top: 100px;
             padding-bottom: 50px;
             position: relative;
         }
-        .hero-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px;
+
+        /* --- LINKEDIN STYLE CARD --- */
+        .hero-card {
             width: 100%;
             max-width: 1100px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            position: relative;
         }
-        .hero-text { flex: 1; }
-        .hero-image { flex: 0 0 350px; position: relative; }
+
+        .cover-bg {
+            width: 100%;
+            height: 280px;
+            background-image: url('cover.jpg'); /* LinkedIn Banner */
+            background-size: cover;
+            background-position: center;
+            background-color: var(--primary-dark);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hero-main-content {
+            display: flex;
+            align-items: flex-end;
+            padding: 0 50px 50px;
+            margin-top: -90px; /* Pull content up to overlap banner */
+            gap: 40px;
+        }
+
+        .hero-text { 
+            flex: 1; 
+            padding-bottom: 10px;
+        }
+        
         .profile-pic {
-            width: 350px;
-            height: 350px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             object-fit: cover;
             border: 8px solid rgba(255,255,255,0.2);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            object-position: top; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            background: var(--white);
+            flex-shrink: 0;
         }
-        .hero-content h1 { font-size: 3.5rem; margin-bottom: 10px; line-height: 1.2; }
-        .hero-content h2 { font-size: 1.5rem; font-weight: 300; margin-bottom: 25px; color: #ddd; }
+
+        .hero-content h1 { font-size: 3rem; margin-bottom: 5px; line-height: 1.2; color: var(--white); }
+        .hero-content h2 { font-size: 1.3rem; font-weight: 300; margin-bottom: 20px; color: #ccc; }
+        
         .status-badge {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             border: 1px solid var(--accent);
             color: var(--accent);
-            padding: 8px 20px;
+            padding: 6px 18px;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             display: inline-block;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             backdrop-filter: blur(5px);
         }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
         .scroll-down {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
             color: var(--white);
             font-size: 1.5rem;
-            opacity: 0.7;
+            opacity: 0.5;
         }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -487,15 +524,22 @@
         }
 
         @media (max-width: 900px) {
-            .hero-container { flex-direction: column-reverse; text-align: center; }
-            .hero-image { margin-bottom: 30px; }
-            .profile-pic { width: 250px; height: 250px; }
-            .hero-content h1 { font-size: 2.5rem; }
+            .hero-main-content { 
+                flex-direction: column; 
+                align-items: center; 
+                text-align: center; 
+                margin-top: -100px;
+                padding: 0 20px 40px;
+            }
+            .hero-text { padding-bottom: 0; }
+            .profile-pic { width: 180px; height: 180px; }
+            .hero-content h1 { font-size: 2.2rem; }
             .nav-links { display: none; }
             .university-grid { grid-template-columns: 1fr; }
             .research-grid { grid-template-columns: 1fr; }
             .skills-wrapper { grid-template-columns: 1fr; }
-            .exp-grid { grid-template-columns: 1fr; } /* Stack exp grid on mobile */
+            .exp-grid { grid-template-columns: 1fr; } 
+            .hero-actions { justify-content: center; }
         }
     </style>
 </head>
@@ -517,24 +561,29 @@
     </nav>
 
     <section id="hero">
-        <div class="container hero-container">
-            <div class="hero-text hero-content reveal active">
-                <div class="status-badge"><i class="fas fa-check-circle"></i> Open to Work: R&D (Sept 2026)</div>
-                <h1>Hello, I'm Vishal S</h1>
-                <h2>PhD Scholar | Farm Machinery and Power Engineering | Mechatronics | Smart Farm Implements</h2>
-                <p style="margin-bottom: 30px; opacity: 0.9;">
-                    Bridging the gap between heavy machinery and intelligent systems.<br>
-                    Innovative Agricultural Engineer with expertise in Mechatronics, Sensor Integration, and Precision Agriculture.
-                </p>
-                <div>
-                    <a href="#contact-footer" class="btn">Hire Me</a>
-                    <a href="https://linkedin.com/in/vishal-saravanan-746565224" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="vr.pdf" download="Vishal_S_Resume.pdf" class="btn btn-outline"><i class="fas fa-file-download"></i> Save CV</a>
+        <div class="container">
+            <!-- WRAPPER CARD -->
+            <div class="hero-card reveal active">
+                <div class="cover-bg"></div> <!-- Spread wide banner -->
+                
+                <div class="hero-main-content">
+                    <img src="Vishal.jpg" alt="Vishal S" class="profile-pic">
+                    
+                    <div class="hero-text hero-content">
+                        <div class="status-badge"><i class="fas fa-check-circle"></i> Open to Work: R&D (Sept 2026)</div>
+                        <h1>Hello, I'm Vishal S</h1>
+                        <h2>PhD Scholar | Farm Machinery and Power Engineering | Mechatronics | Smart Farm Implements</h2>
+                        <p style="margin-bottom: 20px; opacity: 0.9; color: #eee;">
+                            Bridging the gap between heavy machinery and intelligent systems.<br>
+                            Innovative Agricultural Engineer with expertise in Mechatronics and Precision Agriculture.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#contact-footer" class="btn">Hire Me</a>
+                            <a href="https://linkedin.com/in/vishal-saravanan-746565224" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="vr.pdf" download="Vishal_S_Resume.pdf" class="btn btn-outline"><i class="fas fa-file-download"></i> Save CV</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-image reveal active">
-                <!-- PHOTO REPLACEMENT -->
-                <img src="Vishal.jpg" alt="Vishal S" class="profile-pic">
             </div>
         </div>
         <a href="#about" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
