@@ -3,19 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIDAR-Based Precision Planter</title>
+    <title>Technical Case Study | Turmeric Precision Planter</title>
+    <!-- Google Fonts synchronized with main portfolio -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; }
-        h1 { color: #2E7D32; }
-        a { color: #2E7D32; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        :root {
+            /* Synchronized with index.html */
+            --primary: #2E7D32;
+            --primary-dark: #1B5E20;
+            --accent: #FFC107;
+            --dark: #1a1a1a;
+            --text-grey: #555;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --font-main: 'Poppins', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--light); 
+            color: var(--dark); 
+            font-family: var(--font-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- HERO SECTION --- */
+        #hero-research {
+            min-height: 50vh;
+            background: linear-gradient(rgba(20,50,20,0.9), rgba(20,50,20,0.8)),
+                        url('https://images.unsplash.com/photo-1625246333195-58197bd47d26?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            padding: 100px 0 60px;
+        }
+
+        .badge {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 5px 15px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .mission-statement {
+            font-size: 1.1rem;
+            color: #ddd;
+            max-width: 850px;
+            font-weight: 300;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        /* --- CONTENT BODY --- */
+        .research-body {
+            padding: 80px 0;
+            min-height: 60vh;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+            position: relative;
+            padding-left: 15px;
+            border-left: 5px solid var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Problem Assessment Section */
+        .problem-section {
+            margin-bottom: 80px;
+        }
+
+        .technical-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-entry {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .problem-entry:nth-last-child(-n+2) { border-bottom: none; } 
+
+        .problem-num {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .problem-entry h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .problem-entry p {
+            font-size: 0.95rem;
+            color: var(--text-grey);
+        }
+
+        /* --- HYPOTHESIS GRID --- */
+        .hypothesis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .hypothesis-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hypothesis-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Image Wrapper & Slideshow Styles */
+        .hypo-img-wrapper {
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Rule for static single images */
+        .hypo-img-wrapper > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hypothesis-card:hover .hypo-img-wrapper > img {
+            transform: scale(1.1);
+        }
+
+        /* Rules for Slideshow images */
+        .hypo-slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .hypo-slide.active { opacity: 1; }
+
+        .hypo-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Navigation Dots */
+        .slide-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 5;
+        }
+        .slide-dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+        }
+        .slide-dot.active { background: var(--white); }
+
+        .hypo-icon {
+            position: absolute;
+            bottom: -25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .hypo-content {
+            padding: 40px 25px 30px; /* Top padding clears the icon */
+            flex-grow: 1;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .hypo-content h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .hypo-content p {
+            font-size: 0.95rem;
+            color: var(--text-grey);
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER --- */
+        .footer-nav {
+            padding: 40px 0;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--white);
+            background: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(46,125,50,0.3);
+        }
+
+        .btn-back:hover { 
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .technical-card { grid-template-columns: 1fr; }
+            h1 { font-size: 2.2rem; }
+        }
     </style>
 </head>
 <body>
-    <h1>LIDAR-Based Precision Planter (PhD Project)</h1>
-    <p><strong>Overview:</strong> Design and development of LIDAR based tractor mounted automatic turmeric precision planter with a low cost mechatronic seed monitoring system.</p>
-    <p>This project focuses on enhancing planting accuracy in agriculture through advanced LIDAR sensors and mechatronics. It aims to provide a cost-effective solution for precision planting of turmeric, integrating robotics and programming for real-time seed monitoring.</p>
-    <p><strong>Technologies Used:</strong> LIDAR Sensors, Mechatronics, Robotics in Agriculture, Python/R Programming.</p>
-    <a href="index.html">Back to Portfolio</a>
+
+    <header id="hero-research">
+        <div class="container">
+            <span class="badge reveal">PhD Research Case Study</span>
+            <h1 class="reveal">Integrated Mechatronic System for <br>Precision Turmeric Planting</h1>
+            <p class="mission-statement reveal">
+                Addressing singulation errors and ground-wheel skidding through active LIDAR velocity synchronization and three-stage progressive metering for small-scale hilly topography.
+            </p>
+        </div>
+    </header>
+
+    <main class="container research-body">
+        
+        <!-- Problem Assessment -->
+        <div class="reveal problem-section">
+            <h2 class="section-title">Field Assessment</h2>
+            <div class="technical-card">
+                <div class="problem-entry">
+                    <span class="problem-num">ISSUE 01</span>
+                    <h3>Automation Scarcity</h3>
+                    <p>Current turmeric planting machinery is predominantly semi-automatic; fully automated solutions are often repurposed from other crops and lack the specialization required for turmeric rhizomes.</p>
+                </div>
+
+                <div class="problem-entry">
+                    <span class="problem-num">ISSUE 02</span>
+                    <h3>Singulation Complexity</h3>
+                    <p>Due to the irregular morphology of turmeric rhizomes, achieving precise singulation during metering is difficult, leading to multiple-seed drops and inflated seed rates.</p>
+                </div>
+
+                <div class="problem-entry">
+                    <span class="problem-num">ISSUE 03</span>
+                    <h3>Check-Row Discontinuity</h3>
+                    <p>Lack of drop-point control results in irregular crop spacing, making intercultural operations and mechanical weeding highly difficult.</p>
+                </div>
+
+                <div class="problem-entry">
+                    <span class="problem-num">ISSUE 04</span>
+                    <h3>Drive-Train Slippage</h3>
+                    <p>Traditional ground-wheel drives are prone to skidding and slippage, leading to significant errors in seed-to-seed spacing accuracy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategy / Hypothesis Grid -->
+        <div class="reveal">
+            <h2 class="section-title">System Hypothesis & Solution</h2>
+            <div class="hypothesis-grid">
+                
+                <!-- Card 1: Slideshow (2 images) -->
+                <div class="hypothesis-card">
+                    <div class="hypo-img-wrapper" id="hypo-1">
+                        <div class="hypo-slide active"><img src="morphology-1.jpg" alt="Morphology 1"></div>
+                        <div class="hypo-slide"><img src="morphology-2.jpg" alt="Morphology 2"></div>
+                        <div class="slide-dots">
+                            <div class="slide-dot active"></div>
+                            <div class="slide-dot"></div>
+                        </div>
+                    </div>
+                    <div class="hypo-icon"><i class="fas fa-expand"></i></div>
+                    <div class="hypo-content">
+                        <h4>Morphological Optimization</h4>
+                        <p>Engineering metering cells specifically optimized for turmeric rhizome geometry to ensure stable physical handling.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Single Image -->
+                <div class="hypothesis-card">
+                    <div class="hypo-img-wrapper">
+                        <img src="metering-1.jpg" alt="Metering Mechanism">
+                    </div>
+                    <div class="hypo-icon"><i class="fas fa-layer-group"></i></div>
+                    <div class="hypo-content">
+                        <h4>Three-Stage Metering</h4>
+                        <p>Volume is reduced progressively across three tiered stages, each driven by independent motors, to isolate single rhizomes.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Slideshow (2 images) -->
+                <div class="hypothesis-card">
+                    <div class="hypo-img-wrapper" id="hypo-3">
+                        <div class="hypo-slide active"><img src="lidar-sync-1.jpg" alt="LIDAR Sync 1"></div>
+                        <div class="hypo-slide"><img src="lidar-sync-2.jpg" alt="LIDAR Sync 2"></div>
+                        <div class="slide-dots">
+                            <div class="slide-dot active"></div>
+                            <div class="slide-dot"></div>
+                        </div>
+                    </div>
+                    <div class="hypo-icon"><i class="fas fa-radar"></i></div>
+                    <div class="hypo-content">
+                        <h4>Active Speed Sync</h4>
+                        <p>Ground wheels replaced by a LIDAR-Encoder fusion system to drive stepper motors in real-time sync with tractor velocity.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Single Image -->
+                <div class="hypothesis-card">
+                    <div class="hypo-img-wrapper">
+                        <img src="solenoid-1.jpg" alt="Solenoid Delivery">
+                    </div>
+                    <div class="hypo-icon"><i class="fas fa-magnet"></i></div>
+                    <div class="hypo-content">
+                        <h4>Solenoid Delivery</h4>
+                        <p>A triggered delivery gate regulates the exact spatial drop-point, allowing for consistent check-row patterns.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="footer-nav reveal">
+            <a href="index.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i>
+                RETURN TO PORTFOLIO
+            </a>
+        </footer>
+
+    </main>
+
+    <script>
+        // Reveal on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Slideshow Logic (Only for Card 1 and Card 3)
+        function initSlideshow(id) {
+            const container = document.getElementById(id);
+            const slides = container.querySelectorAll('.hypo-slide');
+            const dots = container.querySelectorAll('.slide-dot');
+            let index = 0;
+
+            setInterval(() => {
+                slides[index].classList.remove('active');
+                dots[index].classList.remove('active');
+                
+                index = (index + 1) % slides.length;
+                
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+            }, 4000); // 4 seconds per slide
+        }
+
+        // Initialize only for cards with slideshows
+        initSlideshow('hypo-1');
+        initSlideshow('hypo-3');
+
+    </script>
 </body>
 </html>
