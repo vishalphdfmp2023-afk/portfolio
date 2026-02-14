@@ -335,7 +335,7 @@
             background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
             transition: 0.3s;
         }
-        /* New: Overlay Button on Image Hover */
+        /* Overlay Button on Image Hover */
         .research-img .overlay-btn {
             position: absolute;
             top: 50%;
@@ -395,7 +395,7 @@
             margin-bottom: 8px;
         }
 
-        /* New: Explicit Footer Link */
+        /* Explicit Footer Link */
         .card-footer {
             margin-top: 20px;
             padding-top: 15px;
@@ -415,26 +415,6 @@
         .research-card:hover .view-link i {
             transform: translateX(5px);
             transition: 0.3s;
-        }
-
-        .ai-action-btn {
-            background: var(--accent);
-            color: var(--dark);
-            border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: 0.3s;
-            z-index: 10;
-        }
-        .ai-action-btn:hover {
-            transform: scale(1.05);
-            background: #ffca28;
         }
 
         /* AI Floating Assistant */
@@ -690,6 +670,37 @@
         <a href="#about" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
     </section>
 
+    <!-- AI Floating Toggle -->
+    <div class="ai-assistant-toggle" id="ai-toggle" title="Brainstorm solutions with AI">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- AI Modal -->
+    <div class="ai-modal" id="ai-modal">
+        <div class="ai-modal-content">
+            <div class="ai-modal-header">
+                <h3>✨ Engineering Brainstormer</h3>
+                <i class="fas fa-times" id="ai-close" style="cursor:pointer;"></i>
+            </div>
+            <div class="ai-modal-body">
+                <p id="ai-intro-text">Have a challenging agricultural problem? Describe it below, and I'll suggest a mechatronics solution based on Vishal's expertise in LIDAR and smart farm implements.</p>
+                
+                <div class="ai-response" id="ai-brainstorm-response"></div>
+                
+                <div class="loading-dots" id="ai-loading">
+                    <div class="dot-pulse"></div>
+                    <div class="dot-pulse" style="animation-delay: 0.2s"></div>
+                    <div class="dot-pulse" style="animation-delay: 0.4s"></div>
+                </div>
+
+                <div class="ai-input-group" id="ai-input-container">
+                    <textarea class="ai-textarea" id="ai-prompt" placeholder="e.g., We need a way to detect weeds in uneven hilly terrain using low-cost sensors..."></textarea>
+                    <button class="btn" id="btn-generate-solution" style="width:100%; margin:0;">✨ Generate Solution Idea</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section id="about" class="section-padding">
         <div class="container">
             <h2 class="section-title">About Me</h2>
@@ -777,7 +788,7 @@
             <div class="research-grid reveal">
                 <a href="lidar-precision-planter.html" class="research-card">
                     <div class="research-img" style="background-image: url('lidar-planter.jpg');">
-                        <!-- Overlay Button to indicate clickability -->
+                        <!-- Overlay Button -->
                         <div class="overlay-btn"><i class="fas fa-eye"></i> View Brief</div>
                     </div>
                     <div class="research-content">
@@ -791,7 +802,7 @@
                             <span class="research-tag">Precision Agriculture</span>
                         </div>
 
-                        <!-- Added Footer Link -->
+                        <!-- Footer Link -->
                         <div class="card-footer">
                             <span class="view-link">View Project Brief <i class="fas fa-arrow-right"></i></span>
                         </div>
@@ -800,7 +811,7 @@
                 
                 <a href="renewable-paddy-thresher.html" class="research-card">
                     <div class="research-img" style="background-image: url('solar-thresher.jpg');">
-                        <!-- Overlay Button to indicate clickability -->
+                        <!-- Overlay Button -->
                         <div class="overlay-btn"><i class="fas fa-eye"></i> View Brief</div>
                     </div>
                     <div class="research-content">
@@ -814,7 +825,7 @@
                             <span class="research-tag">Threshing Technology</span>
                         </div>
 
-                        <!-- Added Footer Link -->
+                        <!-- Footer Link -->
                         <div class="card-footer">
                             <span class="view-link">View Project Brief <i class="fas fa-arrow-right"></i></span>
                         </div>
@@ -859,7 +870,7 @@
                             <div class="circle-wrap"><i class="fas fa-cube"></i></div>
                             <div class="software-name">SolidWorks</div>
                             <div class="software-level">CSWA Certified</div>
-                            <!-- Added Download Button -->
+                            <!-- Download Button -->
                             <a href="cswa.pdf" download="Vishal_S_CSWA_Certificate.pdf" style="display: inline-block; margin-top: 10px; font-size: 0.75rem; color: var(--primary); border: 1px solid var(--primary); padding: 5px 15px; border-radius: 20px; text-decoration: none; font-weight: 600; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='var(--primary)'">
                                 <i class="fas fa-file-download"></i> Download Cert
                             </a>
@@ -1012,65 +1023,6 @@
             const blob = new Blob([header, pcmBuffer], { type: 'audio/wav' });
             return URL.createObjectURL(blob);
         }
-
-        // Feature: Narrate Profile Summary (Only if button exists)
-        const btnPitch = document.getElementById('btn-pitch');
-        if (btnPitch) {
-            btnPitch.addEventListener('click', async () => {
-                const originalText = btnPitch.innerHTML;
-                btnPitch.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-                btnPitch.disabled = true;
-
-                try {
-                    const pitchText = "Say cheerfully and professionally: Hello! I'm Vishal S, a PhD scholar specializing in Farm Machinery and Power Engineering. My expertise lies in mechatronics, LIDAR integration, and structural analysis. I'm passionate about building the future of precision agriculture. It's great to have you on my portfolio!";
-                    const audioData = await callGeminiTTS(pitchText);
-                    const wavUrl = pcmToWav(audioData.data);
-                    const audio = new Audio(wavUrl);
-                    audio.play();
-                    btnPitch.innerHTML = '✨ Playing...';
-                    audio.onended = () => {
-                        btnPitch.innerHTML = originalText;
-                        btnPitch.disabled = false;
-                    };
-                } catch (err) {
-                    btnPitch.innerHTML = '⚠️ Audio Error';
-                    setTimeout(() => { btnPitch.innerHTML = originalText; btnPitch.disabled = false; }, 3000);
-                }
-            });
-        }
-
-        // Feature: Research Impact Summarizer
-        document.querySelectorAll('.ai-action-btn').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                e.preventDefault(); // Prevent link navigation
-                e.stopPropagation(); // Stop bubbling to parent
-                const topic = btn.getAttribute('data-topic');
-                const originalText = btn.innerText;
-                btn.innerText = '✨ Analyzing...';
-                
-                // Open modal for response
-                const modal = document.getElementById('ai-modal');
-                const responseDiv = document.getElementById('ai-brainstorm-response');
-                const intro = document.getElementById('ai-intro-text');
-                const inputCont = document.getElementById('ai-input-container');
-                
-                modal.style.display = 'flex';
-                intro.style.display = 'none';
-                inputCont.style.display = 'none';
-                responseDiv.style.display = 'block';
-                responseDiv.innerHTML = '<div class="loading-dots" style="display:block"><div class="dot-pulse"></div><div class="dot-pulse"></div><div class="dot-pulse"></div></div>';
-
-                try {
-                    const prompt = `Explain the social and economic impact of a research project titled "${topic}" to a non-expert farmer or investor. Keep it under 100 words and focus on how it makes farming better.`;
-                    const result = await callGeminiText(prompt, "You are a helpful research communication specialist for an agricultural engineer named Vishal S.");
-                    responseDiv.innerHTML = `<strong>Project Impact:</strong><br>${result}`;
-                    btn.innerText = originalText;
-                } catch (err) {
-                    responseDiv.innerText = "Error: Unable to connect to AI. Please check your connection.";
-                    btn.innerText = '⚠️ Error';
-                }
-            });
-        });
 
         // Feature: Engineering Brainstormer
         const toggle = document.getElementById('ai-toggle');
