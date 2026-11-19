@@ -683,7 +683,7 @@
                 <i class="fas fa-times" id="ai-close" style="cursor:pointer;"></i>
             </div>
             <div class="ai-modal-body">
-                <p id="ai-intro-text">Have a challenging agricultural problem? Describe it below, and I'll suggest a mechatronics solution based on Vishal's expertise in LIDAR and smart farm implements.</p>
+                <p id="ai-intro-text">Have a challenging agricultural problem? Describe it below, and I'll suggest a mechatronics solution based on Vishal's expertise in mechatronics and smart farm implements.</p>
                 
                 <div class="ai-response" id="ai-brainstorm-response"></div>
                 
@@ -719,9 +719,9 @@
                     <div class="uni-content">
                         <h3>PhD in Farm Machinery and Power Engineering</h3>
                         <h4>TNAU, Coimbatore, Tamil Nadu</h4>
-                        <div class="year">Expected graduation: September 2026</div>
+                        <div class="year">Expected graduation: February 2026</div>
                         <p><strong>Relevant Coursework:</strong> Mechatronics and Robotics in Agriculture, Advances in Machinery for Precision Agriculture, R and Python Programming, Fuels and Combustion.</p>
-                        <p><strong>Project:</strong> "Design and development of LIDAR based tractor mounted automatic turmeric precision planter with a low cost mechatronic seed monitoring system".</p>
+                        <p><strong>Project:</strong> "Design and development of tractor mounted automatic turmeric precision planter with a low cost mechatronic seed monitoring system".</p>
                     </div>
                 </div>
 
@@ -792,12 +792,12 @@
                         <div class="overlay-btn"><i class="fas fa-eye"></i> View Brief</div>
                     </div>
                     <div class="research-content">
-                        <h3 style="font-size: 1.25rem; line-height: 1.4;">Design and development of LIDAR based tractor mounted automatic turmeric precision planter with a low cost mechatronic seed monitoring system</h3>
+                        <h3 style="font-size: 1.25rem; line-height: 1.4;">Design and development of tractor mounted automatic turmeric precision planter with a low cost mechatronic seed monitoring system</h3>
                         <span class="degree">PhD Research – TNAU</span>
-                        <p>Developing an advanced precision agriculture solution integrating LIDAR for accurate planting and real-time seed monitoring to enhance efficiency and reduce waste in turmeric cultivation.</p>
+                        <p>Developing an advanced precision agriculture solution integrating automated planting and real-time seed monitoring to enhance efficiency and reduce waste in turmeric cultivation.</p>
                         
                         <div style="margin-top: auto;">
-                            <span class="research-tag">LIDAR</span>
+                            <span class="research-tag">Seed Monitoring</span>
                             <span class="research-tag">Mechatronics</span>
                             <span class="research-tag">Precision Agriculture</span>
                         </div>
@@ -919,7 +919,6 @@
                     <div style="display:flex; flex-wrap:wrap; gap:10px;">
                         <span style="background:#e8f5e9; color:var(--primary-dark); padding:8px 15px; border-radius:20px; font-weight:600;">Precision Agriculture</span>
                         <span style="background:#e8f5e9; color:var(--primary-dark); padding:8px 15px; border-radius:20px; font-weight:600;">Mechatronics</span>
-                        <span style="background:#e8f5e9; color:var(--primary-dark); padding:8px 15px; border-radius:20px; font-weight:600;">LIDAR Systems</span>
                         <span style="background:#e8f5e9; color:var(--primary-dark); padding:8px 15px; border-radius:20px; font-weight:600;">Farm Machinery Design</span>
                     </div>
                 </div>
@@ -1052,7 +1051,7 @@
                 generateBtn.disabled = true;
 
                 try {
-                    const systemPrompt = "You are an expert Agricultural Engineer and Mechatronics specialist. You are assisting Vishal S, who has expertise in SolidWorks, LIDAR, Python, and precision planters. Brainstorm a high-tech solution idea for the problem provided.";
+                    const systemPrompt = "You are an expert Agricultural Engineer and Mechatronics specialist. You are assisting Vishal S, who has expertise in SolidWorks, Python, mechatronics, and precision planters. Brainstorm a high-tech solution idea for the problem provided.";
                     const result = await callGeminiText(promptInput.value, systemPrompt);
                     
                     responseDiv.innerHTML = `<strong>AI Brainstorm Result:</strong><br>${result}`;
